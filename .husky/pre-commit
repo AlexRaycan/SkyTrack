@@ -3,12 +3,5 @@
 
 npm run lint
 
+npm run prettier-fix
 npm run format:check
-if [ $? -ne 0 ]; then
-  npm run prettier-fix
-  npm run format:check
-  if [ $? -ne 0 ]; then
-    echo "Форматирование не удалось исправить автоматически. Коммит отменён."
-    exit 1
-  fi
-fi
