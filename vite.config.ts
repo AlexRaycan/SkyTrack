@@ -7,9 +7,10 @@ import tanstackRouter from '@tanstack/router-plugin/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
+    base: '/SkyTrack/',
     server: {
         host: '0.0.0.0',
-        port: 8000,
+        port: 4004,
     },
     resolve: {
         alias: {
