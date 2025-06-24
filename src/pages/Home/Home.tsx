@@ -1,6 +1,6 @@
 export const Home = () => {
     return (
-        <main className="h-dvh content-center bg-gray-900">
+        <main className="h-dvh content-center bg-gray-900 text-white">
             <div key="map" className="h-dvh w-dvw content-center">
                 Map
             </div>
