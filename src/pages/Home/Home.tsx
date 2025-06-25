@@ -1,15 +1,23 @@
+import FlightList from '@pages/Home/FlightList';
+import MapPlaceholder from '@assets/images/map-placeholder.jpg';
+import FlightInformation from '@pages/Home/FlightInformation';
+
 export const Home = () => {
-    return (
-        <main className="h-dvh content-center bg-gray-900 text-white">
-            <div key="map" className="h-dvh w-dvw content-center">
-                Map
-            </div>
-            <aside className="absolute top-0 left-0 flex max-h-dvh">
-                <h2>Flights</h2>
-            </aside>
-            <aside className="absolute top-0 right-0 flex max-h-dvh">
-                <h2>Current Flight</h2>
-            </aside>
-        </main>
-    );
+	return (
+		<main className="flex h-dvh w-dvw content-center justify-between bg-gray-900 text-white">
+			<FlightList />
+			<div
+				key="map"
+				className="absolute inset-0 z-0 h-dvh w-dvw content-center"
+			>
+				<img
+					src={MapPlaceholder}
+					alt=""
+					loading="lazy"
+					className="h-full w-full object-cover"
+				/>
+			</div>
+			<FlightInformation />
+		</main>
+	);
 };

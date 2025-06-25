@@ -1,6 +1,9 @@
 {
-    "extends": ["stylelint-config-standard", "stylelint-config-tailwindcss"],
-    "rules": {
-        "color-named": "never"
-    }
+	"extends": ["stylelint-config-standard", "stylelint-config-tailwindcss"],
+	"rules": {
+		"no-descending-specificity": null,
+		"color-named": "never",
+		"no-empty-source": null,
+		"at-rule-no-deprecated": null
+	}
 }

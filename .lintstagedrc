@@ -1,4 +1,4 @@
 {
-    "*.{js,ts,jsx,tsx}": ["npm run lint:fix", "npm run prettier-fix", "git add"],
-    "*.{css,scss}": ["stylelint \"**/*.scss\" --fix", "npm run prettier-fix", "git add"]
+	"*.{js,ts,jsx,tsx}": ["npm run lint:fix", "npm run prettier-fix", "git add"],
+	"*.{css,scss}": ["stylelint \"**/*.scss\" --fix", "npm run prettier-fix", "git add"]
 }
