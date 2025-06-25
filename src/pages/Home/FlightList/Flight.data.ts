@@ -13,6 +13,8 @@ import airbusA320 from '@assets/images/aircrafts/03_s7_Airbus-A320.png';
 import airbusA321 from '@assets/images/aircrafts/04_SWISS_Airbus-A321.png';
 import airbusA350 from '@assets/images/aircrafts/05_Lufthansa_Airbus-A350-900.png';
 
+// ? TODO: Надо добавить международный код страны, чтобы получать динамически флаги
+
 export const FLIGHTS: IFlight[] = [
 	{
 		flight: {
