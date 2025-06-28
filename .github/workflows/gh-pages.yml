@@ -17,6 +17,12 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
+            - name: Cache bun modules
+              uses: actions/cache@v3
+              with:
+                  path: .bun
+                  key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+
             - name: Setup Bun
               uses: oven-sh/setup-bun@v1
               with:

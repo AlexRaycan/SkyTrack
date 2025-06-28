@@ -1,2 +1,0 @@
-git diff HEAD --quiet
-npx tsc

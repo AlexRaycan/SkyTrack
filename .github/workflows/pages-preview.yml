@@ -1,0 +1,32 @@
+name: pages-preview.yml
+on:
+  pull_request:
+      types: [opened, synchronize, reopened]
+
+jobs:
+  preview:
+      runs-on: ubuntu-latest
+      permissions:
+          contents: read
+          pages: write
+          id-token: write
+      environment:
+          name: github-pages
+          url: ${{ steps.deploy-pages.outputs.page_url }}
+
+      steps:
+          - uses: actions/checkout@v3
+          - uses: oven-sh/setup-bun@v1
+            with:
+                bun-version: latest
+          - run: bun install
+          - run: bun run build
+          - uses: actions/configure-pages@v2
+
+          # обновили на v3
+          - uses: actions/upload-pages-artifact@v3
+            with:
+                path: ./dist
+
+          - id: deploy-pages
+            uses: actions/deploy-pages@v1
