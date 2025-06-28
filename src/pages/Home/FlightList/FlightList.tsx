@@ -17,6 +17,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				'scrollbar-hidden z-10 flex max-h-dvh w-md flex-col gap-4 overflow-auto pt-10 pb-10 pl-10',
 			)}
 		>
+			<h2 hidden>Flight List</h2>
 			{FLIGHTS.map((flight) => (
 				<Card
 					key={flight.flight.flightNumber}

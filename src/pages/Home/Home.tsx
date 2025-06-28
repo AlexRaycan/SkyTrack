@@ -4,7 +4,8 @@ import FlightInformation from '@pages/Home/FlightInformation';
 
 export const Home = () => {
 	return (
-		<main className="flex h-dvh w-dvw content-center justify-between bg-gray-900 text-white">
+		<main className="flex h-dvh w-dvw content-center justify-between bg-gray-900 text-xl leading-none text-white">
+			<h1 hidden>SkyTrack – flight tracking service</h1>
 			<FlightList />
 			<div
 				key="map"

@@ -46,7 +46,7 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 						height="44"
 						loading="lazy"
 					/>
-					<h2 className={cn('card__flight-number', 'text-base')}>{flight.flight.flightNumber}</h2>
+					<h3 className={cn('card__flight-number', 'text-base')}>{flight.flight.flightNumber}</h3>
 				</div>
 				<div className={cn('card__info--wrapper', infoWrapperStyles)}>
 					<div className={cn('inline-flex items-center justify-end gap-3 text-xs')}>

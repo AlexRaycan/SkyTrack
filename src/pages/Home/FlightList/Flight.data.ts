@@ -13,8 +13,6 @@ import airbusA320 from '@assets/images/aircrafts/03_s7_Airbus-A320.png';
 import airbusA321 from '@assets/images/aircrafts/04_SWISS_Airbus-A321.png';
 import airbusA350 from '@assets/images/aircrafts/05_Lufthansa_Airbus-A350-900.png';
 
-// ? TODO: Надо добавить международный код страны, чтобы получать динамически флаги
-
 export const FLIGHTS: IFlight[] = [
 	{
 		flight: {
@@ -50,7 +48,7 @@ export const FLIGHTS: IFlight[] = [
 		},
 		flightInfo: {
 			aircraft: 'Airbus A330',
-			country: { flag: '🇹🇷', name: 'Turkey' },
+			country: { code: 'tr', name: 'Turkey' },
 			speed: 870,
 			altitude: 11200,
 			photo: airbusA330,
@@ -96,7 +94,7 @@ export const FLIGHTS: IFlight[] = [
 		},
 		flightInfo: {
 			aircraft: 'Boeing 737-800',
-			country: { flag: '🇮🇪', name: 'Ireland' },
+			country: { code: 'ie', name: 'Ireland' },
 			speed: 870,
 			altitude: 11300,
 			photo: boeing737,
@@ -142,7 +140,7 @@ export const FLIGHTS: IFlight[] = [
 		},
 		flightInfo: {
 			aircraft: 'Airbus A320',
-			country: { flag: '🇷🇺', name: 'Russia' },
+			country: { code: 'ru', name: 'Russia' },
 			speed: 820,
 			altitude: 10700,
 			photo: airbusA320,
@@ -188,7 +186,7 @@ export const FLIGHTS: IFlight[] = [
 		},
 		flightInfo: {
 			aircraft: 'Airbus A321',
-			country: { flag: '🇨🇭', name: 'Switzerland' },
+			country: { code: 'ch', name: 'Switzerland' },
 			speed: 860,
 			altitude: 10900,
 			photo: airbusA321,
@@ -234,7 +232,7 @@ export const FLIGHTS: IFlight[] = [
 		},
 		flightInfo: {
 			aircraft: 'Airbus A350-900',
-			country: { flag: '🇩🇪', name: 'Germany' },
+			country: { code: 'de', name: 'Germany' },
 			speed: 900,
 			altitude: 11500,
 			photo: airbusA350,
