@@ -1,6 +1,5 @@
 import { type ButtonHTMLAttributes, memo, type ReactElement, useMemo } from 'react';
 import { cn } from '@/helpers/classNames.ts';
-import Cell from '@components/Cell';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: ReactElement;
@@ -14,35 +13,19 @@ const Button = memo(function Button({ ...props }: ButtonProps) {
 	const isFullButton = useMemo(() => icon && isText, [icon, isText]);
 
 	return (
-		/*<button
+		<button
 			type={type}
+			aria-label="Button"
 			className={cn(
+				'inline-flex w-full flex-col items-center justify-center gap-2 bg-[var(--color-primary)] px-4 py-6 hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)]',
+				!isFullButton && 'w-auto',
+				isIconOnly && 'h-10 w-10 rounded-full p-0',
 				className,
-				'inline-flex flex-col items-center justify-center gap-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)]',
-				isIconOnly && 'h-10 w-10 rounded-full',
-				isFullButton && 'w-full px-4 py-6',
 			)}
 			{...otherProps}
 		>
 			{icon}
-			{isText && children}
-		</button>*/
-		<button
-			type={type}
-			className={cn('w-full')}
-			{...otherProps}
-		>
-			<Cell
-				isBG
-				isCentered
-				isColumn
-				gap={2}
-				isInteractive
-				className={cn('', !isFullButton && 'w-auto', isIconOnly && 'h-10 w-10 rounded-full p-0', className)}
-			>
-				{icon}
-				{isText && children}
-			</Cell>
+			{children}
 		</button>
 	);
 });

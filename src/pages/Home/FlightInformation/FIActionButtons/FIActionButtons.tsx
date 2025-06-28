@@ -18,10 +18,46 @@ const FIActionButtons = memo(function FIActionButtons({ ...props }: FIActionButt
 
 	return (
 		<Section className={cn(className)}>
-			<Button icon={<RouteIcon />}>{'Route'}</Button>
-			<Button icon={<FollowIcon />}>Follow</Button>
-			<Button icon={<ShareIcon />}>Share</Button>
-			<Button icon={<MoreIcon />}>More</Button>
+			<Button
+				icon={
+					<RouteIcon
+						height={36}
+						width={36}
+					/>
+				}
+			>
+				<span>Route</span>
+			</Button>
+			<Button
+				icon={
+					<FollowIcon
+						height={36}
+						width={36}
+					/>
+				}
+			>
+				<span>Follow</span>
+			</Button>
+			<Button
+				icon={
+					<ShareIcon
+						height={36}
+						width={36}
+					/>
+				}
+			>
+				<span>Share</span>
+			</Button>
+			<Button
+				icon={
+					<MoreIcon
+						height={36}
+						width={36}
+					/>
+				}
+			>
+				<span>More</span>
+			</Button>
 		</Section>
 	);
 });
