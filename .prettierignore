@@ -1,4 +1,4 @@
 # Ignore artifacts:
 build
 coverage
-src/routeTree.gen.ts
+**/routeTree.gen.ts

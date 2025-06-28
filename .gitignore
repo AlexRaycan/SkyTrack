@@ -34,4 +34,4 @@ dist-ssr
 *.tmp
 .cache
 
-src/routeTree.gen.ts
+**/routeTree.gen.ts
