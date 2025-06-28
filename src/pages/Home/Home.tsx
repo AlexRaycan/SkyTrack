@@ -1,10 +1,11 @@
 import FlightList from '@pages/Home/FlightList';
 import MapPlaceholder from '@assets/images/map-placeholder.jpg';
 import FlightInformation from '@pages/Home/FlightInformation';
+import Layout from '@/layouts/Layout';
 
 export const Home = () => {
 	return (
-		<main className="flex h-dvh w-dvw content-center justify-between bg-gray-900 text-xl leading-none text-white">
+		<Layout>
 			<h1 hidden>SkyTrack – flight tracking service</h1>
 			<FlightList />
 			<div
@@ -19,6 +20,6 @@ export const Home = () => {
 				/>
 			</div>
 			<FlightInformation />
-		</main>
+		</Layout>
 	);
 };

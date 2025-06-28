@@ -10,14 +10,14 @@ interface FICellProps extends CellProps {
 }
 
 const FICell = memo(function FICell({ ...props }: FICellProps) {
-	const { className, children, title, value, isTitleHidden } = props;
+	const { className, children, title, value, isTitleHidden, ...otherProps } = props;
 
 	const titleElement = useMemo(() => {
 		if (typeof title === 'string' || typeof title === 'number') {
 			return (
 				<h5
 					hidden={isTitleHidden}
-					className={cn('text-[var(--color-text-secondary)]')}
+					className={cn('text-muted-foreground')}
 				>
 					{title}
 				</h5>
@@ -41,6 +41,7 @@ const FICell = memo(function FICell({ ...props }: FICellProps) {
 			isBetween={!children}
 			className={cn(className)}
 			{...(children && { gap: 1 })}
+			{...otherProps}
 		>
 			{title && titleElement}
 			{value && valueElement}

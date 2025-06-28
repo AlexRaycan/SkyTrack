@@ -20,8 +20,8 @@ export const FLIGHTS: IFlight[] = [
 				name: 'Turkish Airlines',
 				logo: turkishLogo,
 				gradient: {
-					from: '#D43D3D', // мягкий красный
-					to: '#FFA6A6',
+					from: '#F7B9B9', // мягкий красный
+					to: '#E0C4C4',
 				},
 			},
 			flightNumber: 'TK143',
@@ -66,8 +66,8 @@ export const FLIGHTS: IFlight[] = [
 				name: 'Ryanair',
 				logo: ryanairLogo,
 				gradient: {
-					from: '#336699', // осветлённый тёмно-синий
-					to: '#8ABFFF',
+					from: '#6E99C4', // осветлённый тёмно-синий
+					to: '#C5DFFF',
 				},
 			},
 			flightNumber: 'RN1782',
@@ -112,8 +112,8 @@ export const FLIGHTS: IFlight[] = [
 				name: 'S7 Airlines',
 				logo: s7Logo,
 				gradient: {
-					from: '#AEEA66', // салатовый
-					to: '#D9FFAA',
+					from: '#B7EA93', // салатовый
+					to: '#E6F4CF',
 				},
 			},
 			flightNumber: 'S7124',
@@ -158,8 +158,8 @@ export const FLIGHTS: IFlight[] = [
 				name: 'SWISS',
 				logo: swissLogo,
 				gradient: {
-					from: '#D43D3D',
-					to: '#FFA6A6',
+					from: '#E18A8A',
+					to: '#F8CACB',
 				},
 			},
 			flightNumber: 'LX318',
@@ -204,8 +204,8 @@ export const FLIGHTS: IFlight[] = [
 				name: 'Lufthansa',
 				logo: lufthansaLogo,
 				gradient: {
-					from: '#355D9B',
-					to: '#A4C7FF',
+					from: '#2D407E',
+					to: '#8FB0CF',
 				},
 			},
 			flightNumber: 'LH1234',

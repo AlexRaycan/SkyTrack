@@ -24,9 +24,9 @@ const Cell = memo(function Cell({ ...props }: CellProps) {
 				isBetween && 'justify-between',
 				gap && `gap-${gap}`,
 				isColumn && 'flex-col',
-				isBG && 'bg-[var(--color-primary)] px-4 py-6',
-				header && 'justify-start bg-[var(--color-gray-bg)] p-4 text-left',
-				isInteractive && 'hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)]',
+				isBG && 'bg-background px-4 py-6',
+				header && 'bg-popover justify-start p-4 text-left',
+				isInteractive && 'hover:bg-background-hover active:bg-background-active',
 				className,
 			)}
 		>

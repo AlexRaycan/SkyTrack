@@ -1,5 +1,6 @@
 import { type ButtonHTMLAttributes, memo, type ReactElement, useMemo } from 'react';
 import { cn } from '@/helpers/classNames.ts';
+import './Button.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: ReactElement;
@@ -17,7 +18,7 @@ const Button = memo(function Button({ ...props }: ButtonProps) {
 			type={type}
 			aria-label="Button"
 			className={cn(
-				'inline-flex w-full flex-col items-center justify-center gap-2 bg-[var(--color-primary)] px-4 py-6 hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)]',
+				'bg-background hover:bg-background-hover active:bg-background-active inline-flex w-full flex-col items-center justify-center gap-2 px-4 py-6',
 				!isFullButton && 'w-auto',
 				isIconOnly && 'h-10 w-10 rounded-full p-0',
 				className,

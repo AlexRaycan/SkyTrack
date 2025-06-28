@@ -12,17 +12,23 @@ const Section = memo(function Section({ ...props }: SectionProps) {
 	const { className, children, header, isColumn } = props;
 
 	return (
-		<section
-			className={cn(className, 'inline-flex w-full gap-1 overflow-hidden rounded-3xl', isColumn && 'flex-col')}
-		>
-			{header && (
-				<Cell
-					header={header}
-					isBG
-					isInteractive={false}
-				/>
-			)}
-			{children}
+		<section>
+			<div
+				className={cn(
+					className,
+					'inline-flex w-full gap-1 overflow-hidden rounded-3xl',
+					isColumn && 'flex-col',
+				)}
+			>
+				{header && (
+					<Cell
+						header={header}
+						isBG
+						isInteractive={false}
+					/>
+				)}
+				{children}
+			</div>
 		</section>
 	);
 });

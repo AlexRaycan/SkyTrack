@@ -26,7 +26,7 @@ const FICity = memo(function FICity({ ...props }: FICityProps) {
 				gap={3}
 			>
 				<p className={cn('text-2xl leading-none')}>{city.city}</p>
-				<p className={cn('leading-none text-[var(--color-text-secondary)]')}>{city.timezone}</p>
+				<p className={cn('text-muted-foreground leading-none')}>{city.timezone}</p>
 			</Cell>
 		</Cell>
 	);

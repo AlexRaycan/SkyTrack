@@ -25,6 +25,8 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 
 	const infoWrapperStyles = useMemo(() => 'inline-flex items-center justify-start gap-3', []);
 
+	// ! TODO: раскидать по компонентам
+
 	return (
 		<Link
 			to="/"
@@ -32,7 +34,7 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 			className={cn(
 				className,
 				'card',
-				'flex min-h-48 flex-col justify-between overflow-hidden rounded-3xl bg-zinc-900 p-5 text-white',
+				'bg-background flex min-h-48 flex-col justify-between overflow-hidden rounded-3xl p-5',
 				isActive && 'active',
 			)}
 		>
@@ -49,11 +51,11 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 					<h3 className={cn('card__flight-number', 'text-base')}>{flight.flight.flightNumber}</h3>
 				</div>
 				<div className={cn('card__info--wrapper', infoWrapperStyles)}>
-					<div className={cn('inline-flex items-center justify-end gap-3 text-xs')}>
-						<span className={cn('inline-flex justify-center gap-3 rounded-full bg-gray-100/10 px-3 py-2')}>
+					<div className={cn('text-muted-foreground inline-flex items-center justify-end gap-3 text-xs')}>
+						<span className={cn('bg-muted inline-flex justify-center gap-3 rounded-full px-3 py-2')}>
 							{flight.flight.callSign}
 						</span>
-						<span className={cn('inline-flex justify-center gap-3 rounded-full bg-gray-100/10 px-3 py-2')}>
+						<span className={cn('bg-muted inline-flex justify-center gap-3 rounded-full px-3 py-2')}>
 							{flight.flight.typeCode}
 						</span>
 					</div>

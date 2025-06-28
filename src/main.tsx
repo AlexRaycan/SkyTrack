@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { routeTree } from './routeTree.gen.ts';
 import './index.css';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { ThemeProvider } from '@/context/ThemeProvider.tsx';
 
 const router = createRouter({ routeTree });
 
@@ -18,10 +19,12 @@ if (!rootElement.innerHTML) {
 	const root = createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			<RouterProvider
-				basepath="/SkyTrack"
-				router={router}
-			/>
+			<ThemeProvider>
+				<RouterProvider
+					basepath="/SkyTrack"
+					router={router}
+				/>
+			</ThemeProvider>
 		</StrictMode>,
 	);
 }
