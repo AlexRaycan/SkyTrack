@@ -29,8 +29,8 @@ export default defineConfig({
 			target: 'react',
 			autoCodeSplitting: true,
 		}),
-		react(),
 		tailwindcss(),
 		svgr(),
+		react(),
 	],
 });

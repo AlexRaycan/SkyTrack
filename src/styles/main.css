@@ -1,5 +1,4 @@
 @import url('variables.css');
-@import 'tailwindcss';
 
 *,
 *::before,
@@ -7,7 +6,7 @@
 	box-sizing: border-box;
 }
 
-body {
+:root {
 	font-family: var(--font-family), monospace;
 	font-weight: var(--font-weight-normal);
 	font-size: var(--font-size-base);

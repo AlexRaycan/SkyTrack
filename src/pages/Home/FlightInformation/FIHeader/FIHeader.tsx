@@ -3,6 +3,7 @@ import { cn } from '@/helpers/classNames';
 import Button from '@components/Button';
 import { X } from '@components/animate-ui/icons/x.tsx';
 import type { IAirlineGradient, IFlight } from '@/types/types.ts';
+import { Link } from '@tanstack/react-router';
 
 interface FIHeaderProps {
 	className?: string;
@@ -29,15 +30,17 @@ const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 					<h3 className={cn('text-accent text-3xl')}>{flight.flight.flightNumber}</h3>
 					<p>{flight.flight.airline.name}</p>
 				</div>
-				<Button
-					icon={
-						<X
-							animateOnHover
-							animateOnTap
-						/>
-					}
-					onClick={() => console.debug('Close information')}
-				/>
+				<Link to="/">
+					<Button
+						icon={
+							<X
+								animateOnHover
+								animateOnTap
+							/>
+						}
+						onClick={() => console.debug('Close information')}
+					/>
+				</Link>
 			</header>
 			<img
 				className={cn('h-52')}

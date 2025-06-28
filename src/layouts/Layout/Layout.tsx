@@ -12,7 +12,7 @@ const Layout = memo(function Layout({ ...props }: LayoutProps) {
 	return (
 		<main
 			className={cn(
-				'text-foreground flex h-dvh w-dvw content-center justify-between bg-gray-900 text-xl leading-none',
+				'text-foreground bg-background block content-center justify-between text-xl leading-none',
 				className,
 			)}
 			{...otherProps}
