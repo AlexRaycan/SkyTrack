@@ -4,6 +4,7 @@
 		"no-descending-specificity": null,
 		"color-named": "never",
 		"no-empty-source": null,
-		"at-rule-no-deprecated": null
+		"at-rule-no-deprecated": null,
+		"declaration-empty-line-before": ["always", { "except": ["first-nested"], "ignore": ["after-declaration"] }]
 	}
 }

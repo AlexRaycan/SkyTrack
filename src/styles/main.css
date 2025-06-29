@@ -1,5 +1,4 @@
 @import url('variables.css');
-@import 'tailwindcss';
 
 *,
 *::before,
@@ -7,14 +6,18 @@
 	box-sizing: border-box;
 }
 
-body {
+:root {
 	font-family: var(--font-family), monospace;
 	font-weight: var(--font-weight-normal);
 	font-size: var(--font-size-base);
 	line-height: var(--line-height-base);
+
 	margin: 0;
 	min-width: 320px;
 	min-height: 100dvh;
+
+	font-synthesis: none;
+	text-rendering: optimizelegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

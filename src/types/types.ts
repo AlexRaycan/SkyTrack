@@ -5,7 +5,7 @@ export type IFlightTime = {
 };
 
 export type ICountry = {
-	flag: string;
+	code: string;
 	name: string;
 };
 

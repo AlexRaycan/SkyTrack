@@ -1,21 +1,5 @@
 @import 'tailwindcss';
 
-.card.active {
-	outline: none;
-	position: relative;
-}
-
-/* ! FIXME: сделать бордер градиентом */
-.card.active::after {
-	position: absolute;
-	inset: 0;
-	content: '';
-
-	@apply rounded-3xl;
-
-	border: 4px solid #e44948;
-}
-
 .card-progress-bar::after {
 	--route-passed: 50%;
 

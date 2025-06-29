@@ -20,6 +20,7 @@ export default tseslint.config(
 			'.sonarlint',
 			'.vscode',
 			'temp',
+			'src/components/animate-ui',
 		],
 	},
 	{
