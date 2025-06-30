@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import Cell from '@components/Cell';
 import type { IFlightLocation } from '@/types/types.ts';
 
@@ -8,7 +8,7 @@ interface FICityProps {
 	city: IFlightLocation;
 }
 
-const FICity = memo(function FICity({ ...props }: FICityProps) {
+const FlightDetailsCity = memo(function FICity({ ...props }: FICityProps) {
 	const { className, city } = props;
 
 	return (
@@ -32,4 +32,4 @@ const FICity = memo(function FICity({ ...props }: FICityProps) {
 	);
 });
 
-export default FICity;
+export default FlightDetailsCity;

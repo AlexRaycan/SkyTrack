@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import Button from '@components/Button';
 import { X } from '@components/animate-ui/icons/x.tsx';
 import type { IAirlineGradient, IFlight } from '@/types/types.ts';
@@ -10,7 +10,7 @@ interface FIHeaderProps {
 	flight: IFlight;
 }
 
-const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
+const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 	const { className, flight } = props;
 
 	const gradient = useMemo<IAirlineGradient>(
@@ -32,13 +32,13 @@ const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 				</div>
 				<Link to="/">
 					<Button
+						title={'Close information'}
 						icon={
 							<X
 								animateOnHover
 								animateOnTap
 							/>
 						}
-						onClick={() => console.debug('Close information')}
 					/>
 				</Link>
 			</header>
@@ -54,4 +54,4 @@ const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 	);
 });
 
-export default FIHeader;
+export default FlightDetailsHeader;

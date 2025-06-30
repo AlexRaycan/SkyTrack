@@ -1,4 +1,4 @@
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import './Card.css';
 import { memo, useMemo } from 'react';
 import type { IFlight } from '@/types/types.ts';

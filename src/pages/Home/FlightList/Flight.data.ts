@@ -1,10 +1,10 @@
 import type { IFlight } from '@/types/types.ts';
 // Импорт SVG логотипов
-import turkishLogo from '@assets/logos/turkish.svg';
-import ryanairLogo from '@assets/logos/ryanair.svg';
-import s7Logo from '@assets/logos/s7.svg';
-import swissLogo from '@assets/logos/swiss.svg';
-import lufthansaLogo from '@assets/logos/lufthansa.svg';
+import turkishLogo from '@assets/airlines/turkish.svg';
+import ryanairLogo from '@assets/airlines/ryanair.svg';
+import s7Logo from '@assets/airlines/s7.svg';
+import swissLogo from '@assets/airlines/swiss.svg';
+import lufthansaLogo from '@assets/airlines/lufthansa.svg';
 
 // Импорт фото самолетов
 import airbusA330 from '@assets/images/aircrafts/01_turkish_airbus-A330.png';

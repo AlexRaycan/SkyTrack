@@ -19,6 +19,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 	});
 
 	useEffect(() => {
+		// ! TODO: настраивать только тёмную тему, `light` не настраивать
 		const root = document.documentElement;
 		root.classList.toggle('light', theme === 'light');
 		root.classList.toggle('dark', theme === 'dark');

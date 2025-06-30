@@ -1,9 +1,20 @@
 'use client';
 
-import * as React from 'react';
 import { type LegacyAnimationControls, type SVGMotionProps, useAnimation, type Variants } from 'motion/react';
 
 import { cn } from '@/lib/utils';
+import {
+	Children,
+	cloneElement,
+	type ComponentType,
+	createContext,
+	type ReactElement,
+	useCallback,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 
 const staticAnimations = {
 	path: {
@@ -57,7 +68,7 @@ interface DefaultIconProps<T = string> {
 
 interface AnimateIconProps<T = string> extends DefaultIconProps<T> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	children: React.ReactElement<any, any>;
+	children: ReactElement<any, any>;
 }
 
 interface IconProps<T>
@@ -67,13 +78,13 @@ interface IconProps<T>
 }
 
 interface IconWrapperProps<T> extends IconProps<T> {
-	icon: React.ComponentType<IconProps<T>>;
+	icon: ComponentType<IconProps<T>>;
 }
 
-const AnimateIconContext = React.createContext<AnimateIconContextValue | null>(null);
+const AnimateIconContext = createContext<AnimateIconContextValue | null>(null);
 
 function useAnimateIconContext() {
-	const context = React.useContext(AnimateIconContext);
+	const context = useContext(AnimateIconContext);
 
 	if (!context)
 		return {
@@ -99,10 +110,10 @@ function AnimateIcon({
 	children,
 }: AnimateIconProps) {
 	const controls = useAnimation();
-	const [localAnimate, setLocalAnimate] = React.useState(!!animate);
-	const currentAnimation = React.useRef(animation);
+	const [localAnimate, setLocalAnimate] = useState(!!animate);
+	const currentAnimation = useRef(animation);
 
-	const startAnimation = React.useCallback(
+	const startAnimation = useCallback(
 		(trigger: TriggerProp) => {
 			currentAnimation.current = typeof trigger === 'string' ? trigger : animation;
 			setLocalAnimate(true);
@@ -110,19 +121,19 @@ function AnimateIcon({
 		[animation],
 	);
 
-	const stopAnimation = React.useCallback(() => {
+	const stopAnimation = useCallback(() => {
 		setLocalAnimate(false);
 	}, []);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		currentAnimation.current = typeof animate === 'string' ? animate : animation;
 		setLocalAnimate(!!animate);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [animate]);
 
-	React.useEffect(() => onAnimateChange?.(localAnimate, currentAnimation.current), [localAnimate, onAnimateChange]);
+	useEffect(() => onAnimateChange?.(localAnimate, currentAnimation.current), [localAnimate, onAnimateChange]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (localAnimate) onAnimateStart?.();
 		controls.start(localAnimate ? 'animate' : 'initial').then(() => {
 			if (localAnimate) onAnimateEnd?.();
@@ -149,8 +160,8 @@ function AnimateIcon({
 		children.props?.onPointerUp?.(e);
 	};
 
-	const child = React.Children.only(children);
-	const cloned = React.cloneElement(child, {
+	const child = Children.only(children);
+	const cloned = cloneElement(child, {
 		onMouseEnter: handleMouseEnter,
 		onMouseLeave: handleMouseLeave,
 		onPointerDown: handlePointerDown,
@@ -188,7 +199,7 @@ function IconWrapper<T extends string>({
 	className,
 	...props
 }: IconWrapperProps<T>) {
-	const context = React.useContext(AnimateIconContext);
+	const context = useContext(AnimateIconContext);
 
 	if (context) {
 		const { controls, animation: parentAnimation, loop: parentLoop, loopDelay: parentLoopDelay } = context;
