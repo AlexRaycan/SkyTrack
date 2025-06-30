@@ -14,8 +14,9 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		<section
 			className={cn(
 				className,
-				'fixed',
-				'scrollbar-hidden z-10 flex max-h-dvh flex-col gap-3 overflow-auto pt-10 pb-10 pl-9',
+				// 'fixed pt-10 pb-10 pl-9',
+				'scrollbar-hidden z-10 flex max-h-dvh w-dvw flex-col gap-3 overflow-auto',
+				'px-5 pt-20 pb-32 md:p-0',
 			)}
 		>
 			<h2 hidden>Flight List</h2>

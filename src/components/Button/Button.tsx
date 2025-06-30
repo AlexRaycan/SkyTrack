@@ -36,16 +36,18 @@ const Button = memo(function Button({ ...props }: ButtonProps) {
 				type={type}
 				aria-label="Button"
 				className={cn(
-					'bg-background hover:bg-background-hover hover:text-accent active:bg-background-active inline-flex w-full items-center justify-center gap-2 transition-all duration-200',
+					!isIconOnly && 'button-icon',
+					'bg-background md:hover:bg-background-hover hover:text-accent active:text-accent md:active:bg-background-active inline-flex w-full items-center justify-center gap-2 transition-all duration-200',
+					'text-sm md:text-base',
 					!isHorizontal && 'flex-col',
-					size === 'large' && 'px-6 py-8',
-					size === 'medium' && 'px-3 py-4 text-sm',
-					size === 'small' && 'px-2 py-3 text-xs',
+					size === 'large' && 'px-3 py-3 md:px-6 md:py-4',
+					size === 'medium' && 'px-1.5 py-2 text-sm md:px-3 md:py-4',
+					size === 'small' && 'px-1 py-1.5 text-xs md:px-2 md:py-3',
 					!isFullButton && 'w-auto',
-					isIconOnly && 'aspect-square rounded-full p-0',
-					isIconOnly && size === 'large' && 'w-16',
-					isIconOnly && size === 'medium' && 'w-12',
-					isIconOnly && size === 'small' && 'w-10',
+					isIconOnly && 'aspect-square rounded-full p-3 md:p-4',
+					isIconOnly && size === 'large' && 'h-12 w-12 md:h-16 md:w-16',
+					isIconOnly && size === 'medium' && 'h-6 w-6 md:h-12 md:w-12',
+					isIconOnly && size === 'small' && 'h-5 w-5 md:h-10 md:w-10',
 					isTransparent && 'bg-transparent',
 					className,
 				)}

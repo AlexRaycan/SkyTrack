@@ -100,3 +100,13 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+@layer components {
+	.button-icon svg {
+		@apply aspect-square h-7 w-7 md:h-7 md:w-7;
+	}
+
+	.header-logo svg {
+		@apply aspect-square h-8 w-8;
+	}
+}

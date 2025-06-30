@@ -27,7 +27,9 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 		>
 			<header className={cn('bg-secondary inline-flex w-full items-center justify-between rounded-2xl p-5')}>
 				<div className={cn('inline-flex flex-col gap-2')}>
-					<h3 className={cn('text-accent text-3xl')}>{flight.flight.flightNumber}</h3>
+					<h3 className={cn('text-accent text-2xl font-medium', 'md:text-3xl')}>
+						{flight.flight.flightNumber}
+					</h3>
 					<p>{flight.flight.airline.name}</p>
 				</div>
 				<Link to="/">
@@ -37,13 +39,15 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 							<X
 								animateOnHover
 								animateOnTap
+								width={'inherit'}
+								height={'inherit'}
 							/>
 						}
 					/>
 				</Link>
 			</header>
 			<img
-				className={cn('h-52')}
+				className={cn('max-h-52 object-contain')}
 				src={flight.flightInfo.photo ?? ''}
 				alt={`${flight.flightInfo.aircraft} by ${flight.flight.airline.name}`}
 				width=""

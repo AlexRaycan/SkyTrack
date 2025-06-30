@@ -2,9 +2,11 @@ import { cn } from '@/lib/utils.ts';
 import Button from '@components/Button';
 import { UserRound } from '@components/animate-ui/icons/user-round.tsx';
 import { Heart } from '@components/animate-ui/icons/heart.tsx';
+import MoreIcon from '@assets/icons/other/more.svg?react';
 import Logo from '@assets/logo/logo.svg?react';
 import SwitchTheme from '@/layouts/Layout/SwitchTheme';
 import { Link } from '@tanstack/react-router';
+import { useWindowWidth } from '@/hooks/useWindowWidth.ts';
 
 interface HeaderProps {
 	className?: string;
@@ -12,61 +14,109 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
 	const { className } = props;
+	const { windowWidth, breakpoints } = useWindowWidth();
+	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
 
 	return (
-		<nav className={cn('fixed top-10 right-10 z-50 flex items-center justify-end gap-2', className)}>
-			<ol className={'bg-secondary flex items-center justify-end gap-2 overflow-hidden rounded-full'}>
-				<li>
-					<Link to="/">
+		<>
+			<nav
+				className={cn(
+					// 'fixed top-10 right-10',
+					isMobile && 'fixed bottom-0',
+					'z-20 flex w-full items-center gap-2 p-0',
+					className,
+				)}
+			>
+				<ol
+					className={cn(
+						'bg-background flex min-h-12 w-full items-stretch justify-center overflow-hidden rounded-full md:justify-start',
+						isMobile && 'rounded-t-2xl rounded-b-none pb-10',
+					)}
+				>
+					{!isMobile && (
+						<li className={'inline-flex flex-1 justify-center md:flex-none'}>
+							<Link
+								className={cn('header-logo')}
+								to="/"
+							>
+								<Logo className={cn('h-full')} />
+							</Link>
+						</li>
+					)}
+					{isMobile && (
+						<li className={'header-logo inline-flex flex-1 justify-center md:flex-none'}>
+							<Link
+								to="/"
+								className={cn('inline-flex flex-1 justify-center md:flex-none')}
+							>
+								<Button
+									title={'Profile'}
+									size={'large'}
+									{...(!isMobile && { isHorizontal: true })}
+									isTransparent
+									icon={<Logo />}
+								>
+									Home
+								</Button>
+							</Link>
+						</li>
+					)}
+					<li className={'inline-flex flex-1 justify-center md:flex-none'}>
 						<Button
-							title={'Home'}
+							title={'Profile'}
 							size={'large'}
-							isHorizontal
+							{...(!isMobile && { isHorizontal: true })}
 							isTransparent
-							icon={
-								<Logo
-									height={40}
-									width={40}
-								/>
-							}
-						/>
-					</Link>
-				</li>
-				<li>
-					<Button
-						title={'Profile'}
-						size={'large'}
-						isHorizontal
-						isTransparent
-						icon={
-							<UserRound
-								height={24}
-								width={24}
-							/>
-						}
-					/>
-				</li>
-				<li>
-					<Button
-						title={'Favorites'}
-						size={'large'}
-						isHorizontal
-						isTransparent
-						icon={
-							<Heart
-								height={24}
-								width={24}
-							/>
-						}
-					/>
-				</li>
-			</ol>
-			<ol>
-				<li>
-					<SwitchTheme />
-				</li>
-			</ol>
-		</nav>
+							icon={<UserRound />}
+						>
+							Profile
+						</Button>
+					</li>
+					<li className={'inline-flex flex-1 justify-center md:flex-none'}>
+						<Button
+							className={'flex-1'}
+							title={'Favorites'}
+							size={'large'}
+							{...(!isMobile && { isHorizontal: true })}
+							isTransparent
+							icon={<Heart />}
+						>
+							Favorites
+						</Button>
+					</li>
+					{isMobile && (
+						<li className={'inline-flex flex-1 justify-center md:flex-none'}>
+							<Button
+								className={'flex-1'}
+								title={'Favorites'}
+								size={'large'}
+								{...(!isMobile && { isHorizontal: true })}
+								isTransparent
+								icon={<MoreIcon />}
+							>
+								More
+							</Button>
+						</li>
+					)}
+				</ol>
+				{!isMobile && (
+					<ol>
+						<li>
+							<SwitchTheme />
+						</li>
+					</ol>
+				)}
+			</nav>
+			{isMobile && (
+				<nav>
+					<ol className={cn('fixed top-5 right-5 z-20')}>
+						<li>
+							<SwitchTheme />
+						</li>
+					</ol>
+				</nav>
+			)}
+		</>
 	);
 };
 
