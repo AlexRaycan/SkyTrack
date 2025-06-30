@@ -33,5 +33,3 @@ dist-ssr
 *.DS_Strore
 *.tmp
 .cache
-
-**/routeTree.gen.ts
