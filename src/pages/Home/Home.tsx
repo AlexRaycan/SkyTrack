@@ -1,8 +1,8 @@
 import FlightList from '@pages/Home/FlightList';
 import MapPlaceholder from '@assets/images/map-placeholder.jpg';
-import FlightInformation from '@pages/Home/FlightInformation';
+import FlightDetails from '@pages/Home/FlightInformation';
 import Layout from '@/layouts/Layout';
-import { cn } from '@/helpers/classNames.ts';
+import { cn } from '@/lib/utils.ts';
 
 export const Home = () => {
 	return (
@@ -21,7 +21,7 @@ export const Home = () => {
 			</div>
 			<div className={cn('inset-0 h-dvh w-dvw')}>
 				<FlightList />
-				<FlightInformation />
+				<FlightDetails />
 			</div>
 		</Layout>
 	);

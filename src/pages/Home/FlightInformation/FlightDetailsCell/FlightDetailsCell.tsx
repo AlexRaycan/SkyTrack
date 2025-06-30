@@ -1,5 +1,5 @@
 import { memo, type ReactElement, useMemo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import Cell from '@components/Cell';
 import type { CellProps } from '@components/Cell/Cell.tsx';
 
@@ -9,7 +9,7 @@ interface FICellProps extends CellProps {
 	value?: string | number | ReactElement;
 }
 
-const FICell = memo(function FICell({ ...props }: FICellProps) {
+const FlightDetailsCell = memo(function FICell({ ...props }: FICellProps) {
 	const { className, children, title, value, isTitleHidden, ...otherProps } = props;
 
 	const titleElement = useMemo(() => {
@@ -50,4 +50,4 @@ const FICell = memo(function FICell({ ...props }: FICellProps) {
 	);
 });
 
-export default FICell;
+export default FlightDetailsCell;

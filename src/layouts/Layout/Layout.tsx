@@ -1,6 +1,6 @@
 import { memo, type PropsWithChildren } from 'react';
-import { cn } from '@/helpers/classNames';
-import SwitchTheme from '@/layouts/Layout/SwitchTheme';
+import { cn } from '@/lib/utils.ts';
+import Header from '@/components/Header';
 
 interface LayoutProps extends PropsWithChildren {
 	className?: string;
@@ -17,7 +17,7 @@ const Layout = memo(function Layout({ ...props }: LayoutProps) {
 			)}
 			{...otherProps}
 		>
-			<SwitchTheme />
+			<Header />
 			{children}
 		</main>
 	);

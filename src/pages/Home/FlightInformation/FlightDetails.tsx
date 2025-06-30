@@ -1,20 +1,20 @@
 import { memo, useMemo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import 'flag-icons/css/flag-icons.min.css';
 import { useSearch } from '@tanstack/react-router';
 import { FLIGHTS } from '@pages/Home/FlightList/Flight.data.ts';
 import Section from '@components/Section';
 import Cell from '@components/Cell';
-import FICity from '@pages/Home/FlightInformation/FICity';
-import FICell from '@pages/Home/FlightInformation/FICell';
-import FIActionButtons from '@pages/Home/FlightInformation/FIActionButtons';
-import FIHeader from '@pages/Home/FlightInformation/FIHeader';
+import FlightDetailsCity from '@pages/Home/FlightInformation/FlightDetailsCity';
+import FlightDetailsCell from '@pages/Home/FlightInformation/FlightDetailsCell';
+import FlightDetailsActionButtons from '@pages/Home/FlightInformation/FlightDetailsActionButtons';
+import FlightDetailsHeader from '@pages/Home/FlightInformation/FlightDetailsHeader';
 
 interface FlightInformationProps {
 	className?: string;
 }
 
-const FlightInformation = memo(function FlightInformation({ ...props }: FlightInformationProps) {
+const FlightDetails = memo(function FlightInformation({ ...props }: FlightInformationProps) {
 	const { className } = props;
 	const selected = useSearch({
 		from: '/',
@@ -37,7 +37,7 @@ const FlightInformation = memo(function FlightInformation({ ...props }: FlightIn
 			>
 				<aside className={cn(className, 'bg-secondary flex flex-col gap-4 overflow-hidden rounded-3xl')}>
 					<h2 hidden>{`${flight.flight.flightNumber} information`}</h2>
-					<FIHeader flight={flight} />
+					<FlightDetailsHeader flight={flight} />
 					<section
 						className={cn('inline-flex flex-col gap-3 p-4')}
 						style={{
@@ -48,8 +48,8 @@ const FlightInformation = memo(function FlightInformation({ ...props }: FlightIn
 						<Section isColumn>
 							<h4 hidden>Main flight information</h4>
 							<Cell isInteractive={false}>
-								<FICity city={flight.flight.from} />
-								<FICity city={flight.flight.to} />
+								<FlightDetailsCity city={flight.flight.from} />
+								<FlightDetailsCity city={flight.flight.to} />
 							</Cell>
 							<Cell
 								isBG
@@ -76,24 +76,24 @@ const FlightInformation = memo(function FlightInformation({ ...props }: FlightIn
 								</Cell>
 							</Cell>
 							<Cell isInteractive={false}>
-								<FICell
+								<FlightDetailsCell
 									title={'Scheduled'}
 									value={'08:15'}
 								/>
 								{/*<span>{flight.flight.from.time.scheduled}</span>*/}
-								<FICell
+								<FlightDetailsCell
 									title={'Actual'}
 									value={'08:24'}
 								/>
 								{/*<span>{flight.flight.from.time.actual}</span>*/}
 							</Cell>
 							<Cell isInteractive={false}>
-								<FICell
+								<FlightDetailsCell
 									title={'Scheduled'}
 									value={'13:25'}
 								/>
 								{/*<span>{flight.flight.to.time.scheduled}</span>*/}
-								<FICell
+								<FlightDetailsCell
 									title={'Estimated'}
 									value={'13:23'}
 								/>
@@ -105,12 +105,12 @@ const FlightInformation = memo(function FlightInformation({ ...props }: FlightIn
 							header={<h4>Flight information</h4>}
 						>
 							<Cell isInteractive={false}>
-								<FICell
+								<FlightDetailsCell
 									title={'Aircraft'}
 									isTitleHidden
 									value={flight.flightInfo.aircraft}
 								/>
-								<FICell
+								<FlightDetailsCell
 									title={'Country'}
 									isTitleHidden
 									gap={4}
@@ -119,20 +119,20 @@ const FlightInformation = memo(function FlightInformation({ ...props }: FlightIn
 										className={cn(`fi fi-${flight.flightInfo.country.code.toLowerCase()}`)}
 									></span>
 									<span>{flight.flightInfo.country.name}</span>
-								</FICell>
+								</FlightDetailsCell>
 							</Cell>
 							<Cell isInteractive={false}>
-								<FICell
+								<FlightDetailsCell
 									title={'Speed'}
 									value={`${flight.flightInfo.speed} km/h`}
 								/>
-								<FICell
+								<FlightDetailsCell
 									title={'Altitude'}
 									value={`${flight.flightInfo.altitude} m`}
 								/>
 							</Cell>
 						</Section>
-						<FIActionButtons />
+						<FlightDetailsActionButtons />
 					</section>
 				</aside>
 			</div>
@@ -140,4 +140,4 @@ const FlightInformation = memo(function FlightInformation({ ...props }: FlightIn
 	);
 });
 
-export default FlightInformation;
+export default FlightDetails;

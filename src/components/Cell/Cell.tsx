@@ -1,5 +1,5 @@
 import { memo, type PropsWithChildren, type ReactElement } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 
 export interface CellProps extends PropsWithChildren {
 	className?: string;

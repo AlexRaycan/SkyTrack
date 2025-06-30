@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import Button from '@components/Button';
 import Section from '@components/Section';
 
@@ -13,7 +13,7 @@ interface FIActionButtonsProps {
 	className?: string;
 }
 
-const FIActionButtons = memo(function FIActionButtons({ ...props }: FIActionButtonsProps) {
+const FlightDetailsActionButtons = memo(function FIActionButtons({ ...props }: FIActionButtonsProps) {
 	const { className } = props;
 
 	return (
@@ -62,4 +62,4 @@ const FIActionButtons = memo(function FIActionButtons({ ...props }: FIActionButt
 	);
 });
 
-export default FIActionButtons;
+export default FlightDetailsActionButtons;

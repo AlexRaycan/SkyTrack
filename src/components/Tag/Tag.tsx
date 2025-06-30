@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 
 interface TagProps {
 	className?: string;
