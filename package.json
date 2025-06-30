@@ -13,7 +13,7 @@
 		"prepare": "husky",
 		"lint-staged": "lint-staged",
 		"format:check": "prettier --check .",
-		"prettier-fix": "npx prettier . --write"
+		"prettier:fix": "bunx prettier . --write"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.11",
@@ -42,7 +42,6 @@
 		"@types/react": "^19.1.2",
 		"@types/react-dom": "^19.1.2",
 		"@vitejs/plugin-react": "^4.4.1",
-		"classnames": "^2.5.1",
 		"eslint": "^9.29.0",
 		"eslint-plugin-prettier": "^5.5.0",
 		"eslint-plugin-react-hooks": "^5.2.0",
