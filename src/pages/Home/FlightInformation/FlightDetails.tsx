@@ -41,7 +41,7 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 				// 'fixed top-1/2 right-10 -translate-y-1/2',
 				isMobile && 'fixed inset-0 z-20 mb-24',
 				'z-20 max-h-dvh min-w-full',
-				'md:min-w-lg',
+				'md:min-w-lg md:rounded-3xl',
 				'scrollbar-hidden overflow-auto',
 			)}
 		>

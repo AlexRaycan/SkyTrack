@@ -16,6 +16,11 @@ const Header = (props: HeaderProps) => {
 	const { className } = props;
 	const { windowWidth, breakpoints } = useWindowWidth();
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
+	const linkActiveStyle = {
+		style: {
+			color: 'var(--color-accent)',
+		},
+	};
 
 	return (
 		<>
@@ -23,7 +28,7 @@ const Header = (props: HeaderProps) => {
 				className={cn(
 					// 'fixed top-10 right-10',
 					isMobile && 'fixed bottom-0',
-					'z-20 flex w-full items-center gap-2 p-0',
+					'z-30 flex w-full items-center gap-2 p-0 md:relative',
 					className,
 				)}
 			>
@@ -33,34 +38,23 @@ const Header = (props: HeaderProps) => {
 						isMobile && 'rounded-t-2xl rounded-b-none pb-10',
 					)}
 				>
-					{!isMobile && (
-						<li className={'inline-flex flex-1 justify-center md:flex-none'}>
-							<Link
-								className={cn('header-logo')}
-								to="/"
+					<li className={'header-logo inline-flex flex-1 justify-center md:flex-none'}>
+						<Link
+							to="/"
+							className={cn('inline-flex flex-1 justify-center md:flex-none')}
+							activeProps={linkActiveStyle}
+						>
+							<Button
+								title={'Profile'}
+								size={'large'}
+								isHorizontal={!isMobile}
+								isTransparent
+								icon={<Logo />}
 							>
-								<Logo className={cn('h-full')} />
-							</Link>
-						</li>
-					)}
-					{isMobile && (
-						<li className={'header-logo inline-flex flex-1 justify-center md:flex-none'}>
-							<Link
-								to="/"
-								className={cn('inline-flex flex-1 justify-center md:flex-none')}
-							>
-								<Button
-									title={'Profile'}
-									size={'large'}
-									{...(!isMobile && { isHorizontal: true })}
-									isTransparent
-									icon={<Logo />}
-								>
-									Home
-								</Button>
-							</Link>
-						</li>
-					)}
+								Home
+							</Button>
+						</Link>
+					</li>
 					<li className={'inline-flex flex-1 justify-center md:flex-none'}>
 						<Button
 							title={'Profile'}
@@ -90,7 +84,7 @@ const Header = (props: HeaderProps) => {
 								className={'flex-1'}
 								title={'Favorites'}
 								size={'large'}
-								{...(!isMobile && { isHorizontal: true })}
+								isHorizontal={!isMobile}
 								isTransparent
 								icon={<MoreIcon />}
 							>

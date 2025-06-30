@@ -42,6 +42,10 @@
 	--color-input: var(--input);
 }
 
+body {
+	@apply inset-0 min-h-dvh;
+}
+
 :root {
 	--radius: 0.625rem;
 	--background: oklch(85.5% 0 89.876deg);

@@ -11,7 +11,7 @@ const MapComponent = (props: MapProps) => {
 	return (
 		<div
 			key="map"
-			className={cn('absolute inset-0 z-0 h-dvh w-dvw content-center', className)}
+			className={cn('absolute inset-0 content-center', className)}
 		>
 			<img
 				src={MapPlaceholder}
