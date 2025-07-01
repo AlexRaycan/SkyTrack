@@ -1,4 +1,4 @@
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import { memo } from 'react';
 import type { IFlightLocation } from '@/types/types.ts';
 

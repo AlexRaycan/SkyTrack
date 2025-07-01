@@ -1,16 +1,16 @@
 import { memo, type ReactElement, useMemo } from 'react';
-import { cn } from '@/helpers/classNames';
-import Cell from '@components/Cell';
+import { cn } from '@/lib/utils.ts';
 import type { CellProps } from '@components/Cell/Cell.tsx';
 
 interface FICellProps extends CellProps {
 	title?: string | number | ReactElement;
 	isTitleHidden?: boolean;
 	value?: string | number | ReactElement;
+	alignment?: 'left' | 'right' | 'center';
 }
 
-const FICell = memo(function FICell({ ...props }: FICellProps) {
-	const { className, children, title, value, isTitleHidden, ...otherProps } = props;
+const FlightDetailsCell = memo(function FICell({ ...props }: FICellProps) {
+	const { className, children, title, value, isTitleHidden, alignment = 'left', ...otherProps } = props;
 
 	const titleElement = useMemo(() => {
 		if (typeof title === 'string' || typeof title === 'number') {
@@ -36,18 +36,24 @@ const FICell = memo(function FICell({ ...props }: FICellProps) {
 	}, [value]);
 
 	return (
-		<Cell
-			isBG
-			isBetween={!children}
-			className={cn(className)}
-			{...(children && { gap: 1 })}
+		<div
+			className={cn(
+				className,
+				'inline-flex w-full flex-1 flex-col items-start justify-center gap-2.5',
+				alignment === 'right' && 'items-end',
+				alignment === 'center' && 'items-center',
+				'bg-background px-3 py-4',
+				'hover:bg-background-hover active:bg-background-active transition-colors',
+				'md:flex-row md:justify-between md:gap-2 md:px-4 md:py-6',
+				title && !value && 'md:justify-start',
+			)}
 			{...otherProps}
 		>
 			{title && titleElement}
 			{value && valueElement}
 			{children}
-		</Cell>
+		</div>
 	);
 });
 
-export default FICell;
+export default FlightDetailsCell;

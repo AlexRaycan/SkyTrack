@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import Button from '@components/Button';
 import { X } from '@components/animate-ui/icons/x.tsx';
 import type { IAirlineGradient, IFlight } from '@/types/types.ts';
@@ -10,7 +10,7 @@ interface FIHeaderProps {
 	flight: IFlight;
 }
 
-const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
+const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 	const { className, flight } = props;
 
 	const gradient = useMemo<IAirlineGradient>(
@@ -27,23 +27,30 @@ const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 		>
 			<header className={cn('bg-secondary inline-flex w-full items-center justify-between rounded-2xl p-5')}>
 				<div className={cn('inline-flex flex-col gap-2')}>
-					<h3 className={cn('text-accent text-3xl')}>{flight.flight.flightNumber}</h3>
+					<h3 className={cn('text-accent text-2xl font-medium', 'md:text-3xl')}>
+						{flight.flight.flightNumber}
+					</h3>
 					<p>{flight.flight.airline.name}</p>
 				</div>
-				<Link to="/">
+				<Link
+					to="/"
+					search={(prev) => ({ ...prev, flightNumber: undefined })}
+				>
 					<Button
+						title={'Close information'}
 						icon={
 							<X
 								animateOnHover
 								animateOnTap
+								width={'inherit'}
+								height={'inherit'}
 							/>
 						}
-						onClick={() => console.debug('Close information')}
 					/>
 				</Link>
 			</header>
 			<img
-				className={cn('h-52')}
+				className={cn('max-h-52 object-contain')}
 				src={flight.flightInfo.photo ?? ''}
 				alt={`${flight.flightInfo.aircraft} by ${flight.flight.airline.name}`}
 				width=""
@@ -54,4 +61,4 @@ const FIHeader = memo(function FIHeader({ ...props }: FIHeaderProps) {
 	);
 });
 
-export default FIHeader;
+export default FlightDetailsHeader;

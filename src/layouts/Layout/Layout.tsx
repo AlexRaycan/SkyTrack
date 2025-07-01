@@ -1,6 +1,7 @@
 import { memo, type PropsWithChildren } from 'react';
-import { cn } from '@/helpers/classNames';
-import SwitchTheme from '@/layouts/Layout/SwitchTheme';
+import { cn } from '@/lib/utils.ts';
+import MapComponent from '@pages/Home/MapComponent';
+import Header from '@components/Header';
 
 interface LayoutProps extends PropsWithChildren {
 	className?: string;
@@ -12,13 +13,19 @@ const Layout = memo(function Layout({ ...props }: LayoutProps) {
 	return (
 		<main
 			className={cn(
-				'text-foreground bg-background block content-center justify-between text-xl leading-none',
+				// 'block content-center justify-between',
+				'relative flex flex-col',
+				'text-foreground bg-background min-h-screen leading-none',
+				'p-0',
+				'md:gap-6 md:p-5 2xl:p-10',
 				className,
 			)}
 			{...otherProps}
 		>
-			<SwitchTheme />
-			{children}
+			<h1 hidden>SkyTrack – flight tracking service</h1>
+			<MapComponent />
+			<Header />
+			<div className={cn('flex items-stretch gap-3')}>{children}</div>
 		</main>
 	);
 });

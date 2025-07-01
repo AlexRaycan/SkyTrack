@@ -9,10 +9,11 @@
 :root {
 	font-family: var(--font-family), monospace;
 	font-weight: var(--font-weight-normal);
-	font-size: var(--font-size-base);
-	line-height: var(--line-height-base);
 
-	margin: 0;
+	@apply text-primary;
+	@apply text-sm;
+	@apply md:text-base;
+
 	min-width: 320px;
 	min-height: 100dvh;
 
@@ -20,6 +21,8 @@
 	text-rendering: optimizelegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	@apply duration-200;
 }
 
 p,

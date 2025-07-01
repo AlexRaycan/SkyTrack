@@ -1,3 +1,3 @@
-import FlightInformation from './FlightInformation';
+import FlightDetails from './FlightDetails.tsx';
 
-export default FlightInformation;
+export default FlightDetails;

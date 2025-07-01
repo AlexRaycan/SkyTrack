@@ -1,4 +1,4 @@
-import { cn } from '@/helpers/classNames';
+import { cn } from '@/lib/utils.ts';
 import './Card.css';
 import { memo, useMemo } from 'react';
 import type { IFlight } from '@/types/types.ts';
@@ -36,7 +36,7 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 				className={cn(
 					className,
 					'card',
-					'w-md rounded-3xl bg-transparent p-1',
+					'max-w-md rounded-3xl bg-transparent p-1',
 					'hover:scale-95',
 					isActive && 'from-destructive to-accent bg-gradient-to-r',
 					'transition-all duration-200',
