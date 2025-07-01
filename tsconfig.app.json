@@ -25,17 +25,5 @@
 		"noUncheckedSideEffectImports": true
 	},
 	"include": ["src"],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"build",
-		"coverage",
-		"**/*.test.ts",
-		"**/*.test.tsx",
-		"**/*.spec.ts",
-		"**/*.spec.tsx",
-		"**/*.stories.tsx",
-		"**/*.stories.ts",
-		"src/components/animate-ui"
-	]
+	"exclude": ["src/components/animate-ui"]
 }

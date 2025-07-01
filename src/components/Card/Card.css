@@ -1,5 +1,3 @@
-@import 'tailwindcss';
-
 .card-progress-bar::after {
 	--route-passed: 50%;
 
