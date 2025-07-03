@@ -25,7 +25,6 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 	const isActive = useMemo(() => selected === flight.flight.flightNumber, [flight.flight.flightNumber, selected]);
 
 	// ! TODO: раскидать по компонентам
-	// ! Сделать градиентную обводку для карточки
 
 	return (
 		<Link
@@ -35,8 +34,7 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 			<div
 				className={cn(
 					className,
-					'card',
-					'max-w-md rounded-3xl bg-transparent p-1',
+					'w-full rounded-3xl bg-transparent p-1',
 					'hover:scale-95',
 					isActive && 'from-destructive to-accent bg-gradient-to-r',
 					'transition-all duration-200',

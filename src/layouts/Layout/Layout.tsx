@@ -25,7 +25,7 @@ const Layout = memo(function Layout({ ...props }: LayoutProps) {
 			<h1 hidden>SkyTrack – flight tracking service</h1>
 			<MapComponent />
 			<Header />
-			<div className={cn('flex items-stretch gap-3')}>{children}</div>
+			<div className={cn('flex items-stretch gap-3 md:justify-between')}>{children}</div>
 		</main>
 	);
 });

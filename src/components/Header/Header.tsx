@@ -1,12 +1,8 @@
 import { cn } from '@/lib/utils.ts';
-import Button from '@components/Button';
-import { UserRound } from '@components/animate-ui/icons/user-round.tsx';
-import { Heart } from '@components/animate-ui/icons/heart.tsx';
-import MoreIcon from '@assets/icons/other/more.svg?react';
-import Logo from '@assets/logo/logo.svg?react';
 import SwitchTheme from '@/layouts/Layout/SwitchTheme';
-import { Link } from '@tanstack/react-router';
 import { useWindowWidth } from '@/hooks/useWindowWidth.ts';
+import { HEADER_MENU } from '@components/Header/Header-menu.data.ts';
+import HeaderMenuItem from '@components/Header/HeaderMenuItem';
 
 interface HeaderProps {
 	className?: string;
@@ -16,11 +12,6 @@ const Header = (props: HeaderProps) => {
 	const { className } = props;
 	const { windowWidth, breakpoints } = useWindowWidth();
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
-	const linkActiveStyle = {
-		style: {
-			color: 'var(--color-accent)',
-		},
-	};
 
 	return (
 		<>
@@ -38,60 +29,14 @@ const Header = (props: HeaderProps) => {
 						isMobile && 'rounded-t-2xl rounded-b-none pb-10',
 					)}
 				>
-					<li className={'header-logo inline-flex flex-1 justify-center md:flex-none'}>
-						<Link
-							to="/"
+					{HEADER_MENU.map((item) => (
+						<li
+							key={item.label}
 							className={cn('inline-flex flex-1 justify-center md:flex-none')}
-							activeProps={linkActiveStyle}
 						>
-							<Button
-								title={'Profile'}
-								size={'large'}
-								isHorizontal={!isMobile}
-								isTransparent
-								icon={<Logo />}
-							>
-								Home
-							</Button>
-						</Link>
-					</li>
-					<li className={'inline-flex flex-1 justify-center md:flex-none'}>
-						<Button
-							title={'Profile'}
-							size={'large'}
-							{...(!isMobile && { isHorizontal: true })}
-							isTransparent
-							icon={<UserRound />}
-						>
-							Profile
-						</Button>
-					</li>
-					<li className={'inline-flex flex-1 justify-center md:flex-none'}>
-						<Button
-							className={'flex-1'}
-							title={'Favorites'}
-							size={'large'}
-							{...(!isMobile && { isHorizontal: true })}
-							isTransparent
-							icon={<Heart />}
-						>
-							Favorites
-						</Button>
-					</li>
-					{isMobile && (
-						<li className={'inline-flex flex-1 justify-center md:flex-none'}>
-							<Button
-								className={'flex-1'}
-								title={'Favorites'}
-								size={'large'}
-								isHorizontal={!isMobile}
-								isTransparent
-								icon={<MoreIcon />}
-							>
-								More
-							</Button>
+							<HeaderMenuItem item={item} />
 						</li>
-					)}
+					))}
 				</ol>
 				{!isMobile && (
 					<ol>
@@ -101,15 +46,7 @@ const Header = (props: HeaderProps) => {
 					</ol>
 				)}
 			</nav>
-			{isMobile && (
-				<nav>
-					<ol className={cn('fixed top-5 right-5 z-20')}>
-						<li>
-							<SwitchTheme />
-						</li>
-					</ol>
-				</nav>
-			)}
+			{isMobile && <SwitchTheme className={cn('fixed top-5 right-5 z-20')} />}
 		</>
 	);
 };
