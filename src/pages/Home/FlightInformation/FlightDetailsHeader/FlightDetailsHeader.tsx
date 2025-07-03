@@ -42,8 +42,6 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 							<X
 								animateOnHover
 								animateOnTap
-								width={'inherit'}
-								height={'inherit'}
 							/>
 						}
 					/>

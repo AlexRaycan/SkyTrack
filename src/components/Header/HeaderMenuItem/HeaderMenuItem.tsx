@@ -41,7 +41,6 @@ const HeaderMenuItem = (props: HeaderMenuItemProps) => {
 				title={'Profile'}
 				size={'large'}
 				isHorizontal={!isMobile}
-				isTransparent
 				icon={defaultIcons[item.label]}
 			>
 				{item.label}

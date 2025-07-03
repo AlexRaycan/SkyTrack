@@ -5,6 +5,7 @@ import type { IFlight } from '@/types/types.ts';
 import City from '@components/City';
 import { Link, useSearch } from '@tanstack/react-router';
 import Tag from '@components/Tag';
+import AddToFavoriteButton from '@components/Card/AddToFavoriteButton';
 
 interface ICardProps {
 	className?: string;
@@ -61,6 +62,7 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 						<div className={cn('inline-flex items-center justify-end gap-3 text-xs')}>
 							<Tag label={flight.flight.callSign} />
 							<Tag label={flight.flight.typeCode} />
+							<AddToFavoriteButton flightNumber={flight.flight.flightNumber} />
 						</div>
 					</div>
 					<div className={cn('card__row--wrapper', 'flex gap-3')}>
