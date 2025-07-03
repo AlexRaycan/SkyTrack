@@ -32,7 +32,6 @@ export const getFavoritesFromLocalStorage = () => {
 const saveFavoritesToLocalStorage = (favorites: string[]) => {
 	try {
 		localStorage.setItem(LS_KEY, JSON.stringify(favorites));
-		console.log('Favorites saved to localStorage:', JSON.stringify(favorites));
 	} catch (error) {
 		console.error('Error saving favorites to localStorage:', error);
 	}
@@ -46,7 +45,6 @@ const favoritesSlice = createSlice({
 	reducers: {
 		addFavorite: (state, action) => {
 			const newFavorite = action.payload;
-			console.log('Adding favorite:', state, newFavorite);
 
 			if (!state.includes(newFavorite)) {
 				state.push(newFavorite);
@@ -54,9 +52,12 @@ const favoritesSlice = createSlice({
 			}
 		},
 		removeFavorite: (state, action) => {
-			console.log('Removing favorite:', state, action.payload);
-			state = state.filter((fav) => fav !== action.payload);
-			saveFavoritesToLocalStorage(state);
+			const index = state.indexOf(action.payload);
+
+			if (index !== -1) {
+				state.splice(index, 1);
+				saveFavoritesToLocalStorage(state);
+			}
 		},
 	},
 });

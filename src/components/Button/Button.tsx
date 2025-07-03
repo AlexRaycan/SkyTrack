@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils.ts';
 import './Button.css';
 import { AnimateIcon } from '@components/animate-ui/icons/icon.tsx';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: ReactElement | null;
 	size?: 'small' | 'medium' | 'large';
 	isHorizontal?: boolean;

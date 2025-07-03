@@ -4,10 +4,10 @@ import { cn } from '@/lib/utils.ts';
 import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { addFavorite, removeFavorite } from '@/store/favorites/favorites.slice.ts';
-import { type MouseEvent, useCallback, useEffect, useMemo } from 'react';
+import { type MouseEvent, useCallback, useMemo } from 'react';
+import type { ButtonProps } from '@components/Button/Button.tsx';
 
-interface AddToFavoriteButtonProps {
-	className?: string;
+interface AddToFavoriteButtonProps extends ButtonProps {
 	flightNumber: string;
 }
 
@@ -32,11 +32,6 @@ const AddToFavoriteButton = (props: AddToFavoriteButtonProps) => {
 		},
 		[dispatch, flightNumber, isFavorite],
 	);
-
-	// Check favorites
-	useEffect(() => {
-		console.log('Current favorites:', favorites);
-	}, [favorites]);
 
 	return (
 		<Button
