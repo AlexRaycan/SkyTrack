@@ -2,8 +2,8 @@ import { memo, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { FLIGHTS } from './Flight.data.ts';
 import Card from '@components/Card';
-import { useSearch } from '@tanstack/react-router';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 
 interface FlightListProps {
 	className?: string;
@@ -13,14 +13,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 	const { className } = props;
 	const favorites = useAppSelector((state) => state.favorites);
 
-	const isFavorite = useSearch({
-		strict: false,
-		select: (search) => {
-			const { filter } = search as { filter: string };
-
-			return !!filter;
-		},
-	});
+	const { isFavorite } = useFlightSelectionState();
 
 	const [filter, setFilter] = useState<string>('');
 	const filteredFlights = useMemo(() => {

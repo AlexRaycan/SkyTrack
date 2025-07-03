@@ -1,11 +1,12 @@
 import { cn } from '@/lib/utils.ts';
 import './Card.css';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import type { IFlight } from '@/types/types.ts';
 import City from '@components/City';
-import { Link, useSearch } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import Tag from '@components/Tag';
 import AddToFavoriteButton from '@components/Card/AddToFavoriteButton';
+import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 
 interface ICardProps {
 	className?: string;
@@ -14,17 +15,7 @@ interface ICardProps {
 
 const Card = memo(function Card({ ...props }: ICardProps) {
 	const { className, flight } = props;
-
-	const selected = useSearch({
-		strict: false,
-		select: (search) => {
-			const { flightNumber } = search as { flightNumber: string };
-
-			return flightNumber;
-		},
-	});
-
-	const isActive = useMemo(() => selected === flight.flight.flightNumber, [flight.flight.flightNumber, selected]);
+	const { isActive } = useFlightSelectionState(flight);
 
 	// ! TODO: раскидать по компонентам
 

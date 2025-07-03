@@ -40,7 +40,7 @@ const Button = memo(function Button({ ...props }: ButtonProps) {
 					'bg-background hover:bg-background-hover hover:text-accent active:text-accent md:active:bg-background-active inline-flex w-full items-center justify-center gap-2 transition-all duration-200',
 					'text-sm md:text-base',
 					!isHorizontal && 'flex-col',
-					size === 'large' && 'px-3 py-3 md:px-6 md:py-4',
+					size === 'large' && 'px-3 py-3 md:px-4 md:py-4',
 					size === 'medium' && 'px-1.5 py-2 text-sm md:px-3 md:py-4',
 					size === 'small' && 'px-1 py-1.5 text-xs md:px-2 md:py-3',
 					!isFullButton && 'w-auto',
