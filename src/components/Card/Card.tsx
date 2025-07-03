@@ -14,8 +14,9 @@ interface ICardProps {
 
 const Card = memo(function Card({ ...props }: ICardProps) {
 	const { className, flight } = props;
+
 	const selected = useSearch({
-		from: '/',
+		strict: false,
 		select: (search) => {
 			const { flightNumber } = search as { flightNumber: string };
 
@@ -29,8 +30,9 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 
 	return (
 		<Link
-			to="/"
-			search={isActive ? {} : { flightNumber: flight.flight.flightNumber }}
+			to="."
+			// search={isActive ? {} : { flightNumber: flight.flight.flightNumber }}
+			search={(prev) => ({ ...prev, flightNumber: isActive ? undefined : flight.flight.flightNumber })}
 		>
 			<div
 				className={cn(

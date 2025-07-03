@@ -41,7 +41,7 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 					<p>{flight.flight.airline.name}</p>
 				</div>
 				<Link
-					to="/"
+					to="."
 					search={(prev) => ({ ...prev, flightNumber: undefined })}
 				>
 					<Button

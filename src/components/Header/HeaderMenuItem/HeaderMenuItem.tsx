@@ -1,5 +1,5 @@
 import Button from '@components/Button';
-import { Link } from '@tanstack/react-router';
+import { Link, useSearch } from '@tanstack/react-router';
 import type { IHeaderMenuItemProps } from '@components/Header/Header-menu.data.ts';
 import { cn } from '@/lib/utils.ts';
 import { useWindowWidth } from '@/hooks/useWindowWidth.ts';
@@ -20,6 +20,10 @@ const HeaderMenuItem = (props: HeaderMenuItemProps) => {
 	const { windowWidth, breakpoints } = useWindowWidth();
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
 
+	const search = useSearch({
+		strict: false,
+	});
+
 	const defaultIcons: { [key: string]: ReactElement } = {
 		Profile: <UserRound />,
 		Favorites: <Heart />,
@@ -30,6 +34,7 @@ const HeaderMenuItem = (props: HeaderMenuItemProps) => {
 	return (
 		<Link
 			to={item.to}
+			{...(item.search && { search: { ...search, ...item.search } })}
 			className={cn('inline-flex flex-1 justify-center md:flex-none', className)}
 			activeProps={{
 				style: {

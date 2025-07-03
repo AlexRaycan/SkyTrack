@@ -1,6 +1,7 @@
 export interface IHeaderMenuItemProps {
 	label: string;
 	to: string;
+	search?: { [key: string]: string };
 }
 
 export const HEADER_MENU: IHeaderMenuItemProps[] = [
@@ -14,6 +15,7 @@ export const HEADER_MENU: IHeaderMenuItemProps[] = [
 	},
 	{
 		label: 'Favorites',
-		to: '/favorites',
+		to: '.',
+		search: { filter: 'favorites' },
 	},
 ];

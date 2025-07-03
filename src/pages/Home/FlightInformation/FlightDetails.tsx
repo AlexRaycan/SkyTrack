@@ -21,7 +21,7 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
 
 	const selected = useSearch({
-		from: '/',
+		strict: false,
 		select: (search) => {
 			const { flightNumber } = search as { flightNumber: string };
 
