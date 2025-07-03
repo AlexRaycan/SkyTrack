@@ -28,11 +28,12 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 		>
 			<header className={cn('bg-secondary inline-flex w-full items-center justify-between rounded-2xl p-5')}>
 				<div className={cn('inline-flex flex-col gap-2')}>
-					<div className={cn('inline-flex items-center justify-start gap-1')}>
+					<div className={cn('inline-flex items-center justify-start gap-2')}>
 						<h3 className={cn('text-accent text-2xl font-medium', 'md:text-3xl')}>
 							{flight.flight.flightNumber}
 						</h3>
 						<AddToFavoriteButton
+							className={cn('-mt-1')}
 							size={'small'}
 							flightNumber={flight.flight.flightNumber}
 						/>

@@ -37,7 +37,7 @@ const Button = memo(function Button({ ...props }: ButtonProps) {
 				aria-label="Button"
 				className={cn(
 					!isIconOnly && 'button-icon',
-					'bg-background md:hover:bg-background-hover hover:text-accent active:text-accent md:active:bg-background-active inline-flex w-full items-center justify-center gap-2 transition-all duration-200',
+					'bg-background hover:bg-background-hover hover:text-accent active:text-accent md:active:bg-background-active inline-flex w-full items-center justify-center gap-2 transition-all duration-200',
 					'text-sm md:text-base',
 					!isHorizontal && 'flex-col',
 					size === 'large' && 'px-3 py-3 md:px-6 md:py-4',
@@ -48,7 +48,7 @@ const Button = memo(function Button({ ...props }: ButtonProps) {
 					isIconOnly && size === 'large' && 'h-12 w-12 md:h-16 md:w-16',
 					isIconOnly && size === 'medium' && 'h-6 w-6 md:h-12 md:w-12',
 					isIconOnly && size === 'small' && 'h-5 w-5 md:h-10 md:w-10',
-					isTransparent && 'bg-transparent p-0 md:p-0',
+					isTransparent && 'bg-transparent p-0 hover:bg-transparent md:p-0',
 					className,
 				)}
 				{...otherProps}

@@ -37,11 +37,13 @@ const AddToFavoriteButton = (props: AddToFavoriteButtonProps) => {
 		<Button
 			className={cn('text-muted-foreground', className)}
 			isTransparent
-			size={'medium'}
+			size={'small'}
 			icon={
 				<Heart
 					fill={isFavorite ? 'currentColor' : 'none'}
 					stroke={!isFavorite ? 'currentColor' : 'none'}
+					height={24}
+					width={24}
 				/>
 			}
 			onClick={handleAddToFavorites}
