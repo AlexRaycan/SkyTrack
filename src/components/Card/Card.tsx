@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils.ts';
-import './Card.css';
 import { memo } from 'react';
 import type { IFlight } from '@/types/types.ts';
 import City from '@components/City';
@@ -7,6 +6,7 @@ import { Link } from '@tanstack/react-router';
 import Tag from '@components/Tag';
 import AddToFavoriteButton from '@components/Card/AddToFavoriteButton';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
+import FlightStatus from '@components/FlightStatus';
 
 interface ICardProps {
 	className?: string;
@@ -63,8 +63,9 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 							className={cn('card__city__departure')}
 							departure={flight.flight.from}
 						/>
-						<div
-							className={cn('card-progress-bar', 'bg-muted relative mt-10 h-1 w-full gap-3 rounded-full')}
+						<FlightStatus
+							className={cn('mt-10')}
+							percentage={flight.route.completedPercentage}
 						/>
 						<City
 							className={cn('card__city__arrival')}
