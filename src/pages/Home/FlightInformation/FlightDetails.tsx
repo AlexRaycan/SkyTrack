@@ -10,6 +10,7 @@ import FlightDetailsActionButtons from '@pages/Home/FlightInformation/FlightDeta
 import FlightDetailsHeader from '@pages/Home/FlightInformation/FlightDetailsHeader';
 import { useWindowWidth } from '@/hooks/useWindowWidth.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
+import FlightStatus from '@components/FlightStatus';
 
 interface FlightInformationProps {
 	className?: string;
@@ -59,7 +60,10 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 							gap={6}
 							className={cn('text-muted-foreground')}
 						>
-							<div>Progress bar</div>
+							<FlightStatus
+								percentage={flight.route.completedPercentage}
+								className={cn('mb-4 md:mb-6')}
+							/>
 							<Cell
 								isBetween
 								className={cn('px-4')}

@@ -1,10 +1,7 @@
-.card-progress-bar::after {
-	--route-passed: 50%;
-
+.card-progress-bar {
 	display: block;
 	position: absolute;
 	content: '';
-	width: var(--route-passed);
 	inset: 0;
 	background: linear-gradient(90deg, #e44948 0%, #fba316 100%);
 	border-radius: 100px;
