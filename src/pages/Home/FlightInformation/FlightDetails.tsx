@@ -1,7 +1,6 @@
 import { memo, useMemo } from 'react';
 import { cn } from '@/lib/utils.ts';
 import 'flag-icons/css/flag-icons.min.css';
-import { useSearch } from '@tanstack/react-router';
 import { FLIGHTS } from '@pages/Home/FlightList/Flight.data.ts';
 import Section from '@components/Section';
 import Cell from '@components/Cell';
@@ -10,6 +9,7 @@ import FlightDetailsCell from '@pages/Home/FlightInformation/FlightDetailsCell';
 import FlightDetailsActionButtons from '@pages/Home/FlightInformation/FlightDetailsActionButtons';
 import FlightDetailsHeader from '@pages/Home/FlightInformation/FlightDetailsHeader';
 import { useWindowWidth } from '@/hooks/useWindowWidth.ts';
+import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 
 interface FlightInformationProps {
 	className?: string;
@@ -20,14 +20,7 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 	const { windowWidth, breakpoints } = useWindowWidth();
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
 
-	const selected = useSearch({
-		from: '/',
-		select: (search) => {
-			const { flightNumber } = search as { flightNumber: string };
-
-			return flightNumber;
-		},
-	});
+	const { selected } = useFlightSelectionState();
 
 	const flight = useMemo(() => FLIGHTS.find((fl) => fl.flight.flightNumber === selected), [selected]);
 
@@ -38,7 +31,6 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 	return (
 		<div
 			className={cn(
-				// 'fixed top-1/2 right-10 -translate-y-1/2',
 				isMobile && 'fixed inset-0 z-20 mb-24',
 				'z-20 max-h-dvh min-w-full',
 				'md:min-w-lg md:rounded-3xl',

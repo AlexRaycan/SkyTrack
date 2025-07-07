@@ -104,11 +104,15 @@ body {
 	body {
 		@apply bg-background text-foreground;
 	}
+
+	button {
+		cursor: pointer;
+	}
 }
 
 @layer components {
 	.button-icon svg {
-		@apply aspect-square h-7 w-7 md:h-7 md:w-7;
+		@apply aspect-square h-7 w-7 md:h-6.5 md:w-6.5;
 	}
 
 	.header-logo svg {

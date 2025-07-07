@@ -1,10 +1,12 @@
 import { cn } from '@/lib/utils.ts';
 import './Card.css';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import type { IFlight } from '@/types/types.ts';
 import City from '@components/City';
-import { Link, useSearch } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import Tag from '@components/Tag';
+import AddToFavoriteButton from '@components/Card/AddToFavoriteButton';
+import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 
 interface ICardProps {
 	className?: string;
@@ -13,23 +15,15 @@ interface ICardProps {
 
 const Card = memo(function Card({ ...props }: ICardProps) {
 	const { className, flight } = props;
-	const selected = useSearch({
-		from: '/',
-		select: (search) => {
-			const { flightNumber } = search as { flightNumber: string };
-
-			return flightNumber;
-		},
-	});
-
-	const isActive = useMemo(() => selected === flight.flight.flightNumber, [flight.flight.flightNumber, selected]);
+	const { isActive } = useFlightSelectionState(flight);
 
 	// ! TODO: раскидать по компонентам
 
 	return (
 		<Link
-			to="/"
-			search={isActive ? {} : { flightNumber: flight.flight.flightNumber }}
+			to="."
+			// search={isActive ? {} : { flightNumber: flight.flight.flightNumber }}
+			search={(prev) => ({ ...prev, flightNumber: isActive ? undefined : flight.flight.flightNumber })}
 		>
 			<div
 				className={cn(
@@ -61,6 +55,7 @@ const Card = memo(function Card({ ...props }: ICardProps) {
 						<div className={cn('inline-flex items-center justify-end gap-3 text-xs')}>
 							<Tag label={flight.flight.callSign} />
 							<Tag label={flight.flight.typeCode} />
+							<AddToFavoriteButton flightNumber={flight.flight.flightNumber} />
 						</div>
 					</div>
 					<div className={cn('card__row--wrapper', 'flex gap-3')}>

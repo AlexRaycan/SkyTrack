@@ -4,6 +4,8 @@ import { routeTree } from './routeTree.gen.ts';
 import './index.css';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { ThemeProvider } from '@/context/ThemeProvider.tsx';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 const router = createRouter({ routeTree });
 
@@ -20,10 +22,12 @@ if (!rootElement.innerHTML) {
 	root.render(
 		<StrictMode>
 			<ThemeProvider>
-				<RouterProvider
-					basepath="/SkyTrack"
-					router={router}
-				/>
+				<Provider store={store}>
+					<RouterProvider
+						basepath="/SkyTrack"
+						router={router}
+					/>
+				</Provider>
 			</ThemeProvider>
 		</StrictMode>,
 	);

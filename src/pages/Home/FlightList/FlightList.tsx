@@ -2,6 +2,8 @@ import { memo, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { FLIGHTS } from './Flight.data.ts';
 import Card from '@components/Card';
+import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 
 interface FlightListProps {
 	className?: string;
@@ -9,9 +11,19 @@ interface FlightListProps {
 
 const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 	const { className } = props;
+	const favorites = useAppSelector((state) => state.favorites);
+
+	const { isFavorite } = useFlightSelectionState();
+
 	const [filter, setFilter] = useState<string>('');
 	const filteredFlights = useMemo(() => {
-		if (!filter) return FLIGHTS;
+		let flights = FLIGHTS;
+
+		if (isFavorite) {
+			flights = flights.filter((flight) => favorites.includes(flight.flight.flightNumber));
+		}
+
+		if (!filter) return flights;
 
 		return FLIGHTS.filter((flight) => {
 			const flightInfo = [
@@ -32,7 +44,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 
 			return flightInfo.includes(filter.toLowerCase());
 		});
-	}, [filter]);
+	}, [favorites, filter, isFavorite]);
 
 	return (
 		<section
