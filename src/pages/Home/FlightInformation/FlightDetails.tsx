@@ -11,6 +11,7 @@ import FlightDetailsHeader from '@pages/Home/FlightInformation/FlightDetailsHead
 import { useWindowWidth } from '@/hooks/useWindowWidth.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 import FlightStatus from '@components/FlightStatus';
+import AirplaneUpIcon from '@assets/icons/other/airplane-up.svg?react';
 
 interface FlightInformationProps {
 	className?: string;
@@ -50,8 +51,18 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 					<h3 hidden>Additional flight information</h3>
 					<Section isColumn>
 						<h4 hidden>Main flight information</h4>
-						<Cell isInteractive={false}>
+						<Cell
+							isInteractive={false}
+							className={cn('relative')}
+						>
 							<FlightDetailsCity city={flight.flight.from} />
+							<div
+								className={cn(
+									'bg-secondary text-accent absolute top-1/2 aspect-square -translate-y-1/2 rounded-full p-2',
+								)}
+							>
+								<AirplaneUpIcon />
+							</div>
 							<FlightDetailsCity city={flight.flight.to} />
 						</Cell>
 						<Cell

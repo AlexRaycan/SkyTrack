@@ -82,12 +82,12 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 					/>
 				</label>
 			</form>
+			{/* !TODO: сделать <Skeleton /> самостоятельной карточкой и вынести сюда */}
 			{filteredFlights.map((flight) => (
 				<Card
 					key={flight.flight.flightNumber}
 					flight={flight}
 					isLoading={isLoading}
-					// className={cn('animate-fade-in')}
 				/>
 			))}
 		</section>
