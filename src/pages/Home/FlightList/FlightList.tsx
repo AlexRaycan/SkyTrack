@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { FLIGHTS } from './Flight.data.ts';
 import Card from '@components/Card';
@@ -11,6 +11,7 @@ interface FlightListProps {
 
 const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 	const { className } = props;
+	const [isLoading, setIsLoading] = useState(true);
 	const favorites = useAppSelector((state) => state.favorites);
 
 	const { isFavorite } = useFlightSelectionState();
@@ -46,6 +47,15 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		});
 	}, [favorites, filter, isFavorite]);
 
+	// ! TODO: убрать таймаут, когда данные будут браться с сервера
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setIsLoading(false);
+		}, 1500);
+
+		return () => clearTimeout(timer);
+	}, []);
+
 	return (
 		<section
 			className={cn(
@@ -76,6 +86,8 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				<Card
 					key={flight.flight.flightNumber}
 					flight={flight}
+					isLoading={isLoading}
+					// className={cn('animate-fade-in')}
 				/>
 			))}
 		</section>
