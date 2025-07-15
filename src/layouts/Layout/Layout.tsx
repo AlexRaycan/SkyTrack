@@ -14,10 +14,10 @@ const Layout = memo(function Layout({ ...props }: LayoutProps) {
 		<main
 			className={cn(
 				// 'block content-center justify-between',
-				'relative flex flex-col',
+				'relative flex max-h-dvh flex-col overflow-hidden',
 				'text-foreground bg-background min-h-screen leading-none',
 				'p-0',
-				'md:gap-6 md:p-5 2xl:p-10',
+				'md:gap-6 md:p-5 md:pb-0 2xl:p-10 2xl:pb-0',
 				className,
 			)}
 			{...otherProps}
@@ -25,7 +25,9 @@ const Layout = memo(function Layout({ ...props }: LayoutProps) {
 			<h1 hidden>SkyTrack – flight tracking service</h1>
 			<MapComponent />
 			<Header />
-			<div className={cn('flex items-stretch gap-3 md:justify-between')}>{children}</div>
+			<div className={cn('flex max-h-full items-stretch gap-3 overflow-hidden md:justify-between')}>
+				{children}
+			</div>
 		</main>
 	);
 });

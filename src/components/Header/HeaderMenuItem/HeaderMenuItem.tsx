@@ -36,11 +36,6 @@ const HeaderMenuItem = (props: HeaderMenuItemProps) => {
 			to={item.to}
 			{...(item.search && { search: { ...search, ...item.search } })}
 			className={cn('inline-flex flex-1 justify-center md:flex-none', className)}
-			/*activeProps={{
-				style: {
-					color: 'var(--color-accent)',
-				},
-			}}*/
 		>
 			<Button
 				title={'Profile'}

@@ -21,13 +21,17 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 
 	return (
 		<section
-			className={cn('inline-flex w-full flex-col gap-3 p-5', className)}
+			className={cn('inline-flex w-full flex-col gap-2 p-4 md:gap-3 md:p-5', className)}
 			style={{
 				background: `linear-gradient(to bottom, ${gradient.from}, ${gradient.to})`,
 			}}
 		>
-			<header className={cn('bg-secondary inline-flex w-full items-center justify-between rounded-2xl p-5')}>
-				<div className={cn('inline-flex flex-col gap-2')}>
+			<header
+				className={cn(
+					'bg-secondary inline-flex w-full items-center justify-between rounded-lg p-4 md:rounded-2xl md:p-5',
+				)}
+			>
+				<div className={cn('inline-flex flex-col gap-1 md:gap-2')}>
 					<div className={cn('inline-flex items-center justify-start gap-2')}>
 						<h3 className={cn('text-accent text-2xl font-medium', 'md:text-3xl')}>
 							{flight.flight.flightNumber}
@@ -56,7 +60,7 @@ const FlightDetailsHeader = memo(function FIHeader({ ...props }: FIHeaderProps) 
 				</Link>
 			</header>
 			<img
-				className={cn('max-h-52 object-contain')}
+				className={cn('max-h-44 object-contain md:max-h-52')}
 				src={flight.flightInfo.photo ?? ''}
 				alt={`${flight.flightInfo.aircraft} by ${flight.flight.airline.name}`}
 				width=""

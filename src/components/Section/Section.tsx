@@ -16,7 +16,7 @@ const Section = memo(function Section({ ...props }: SectionProps) {
 			<div
 				className={cn(
 					className,
-					'inline-flex w-full gap-1 overflow-hidden rounded-3xl',
+					'inline-flex w-full gap-1 overflow-hidden rounded-lg md:rounded-3xl',
 					isColumn && 'flex-col',
 				)}
 			>
