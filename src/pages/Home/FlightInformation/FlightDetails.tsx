@@ -48,6 +48,7 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 					'md:mb-5 md:min-w-lg md:rounded-3xl',
 					'2xl:mb-10',
 					'scrollbar-hidden overflow-auto',
+					'pointer-events-auto',
 				)}
 			>
 				<aside
