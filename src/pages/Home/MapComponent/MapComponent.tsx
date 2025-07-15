@@ -52,6 +52,8 @@ const layerStylePoint: LayerProps = {
 	},
 };
 
+const mapStyle = '01980e13-49e3-7035-9cac-73918fb0bbba';
+
 const MapComponent = () => {
 	return (
 		<Map
@@ -60,7 +62,7 @@ const MapComponent = () => {
 				latitude: 41.3901475,
 				zoom: 10, // Initial zoom level
 			}}
-			mapStyle="https://api.maptiler.com/maps/01980e13-49e3-7035-9cac-73918fb0bbba/style.json?key=2UDRBRmjhAKwLNTGwGBp"
+			mapStyle={`https://api.maptiler.com/maps/${mapStyle}/style.json?key=${import.meta.env.VITE_MAP_API_KEY}`}
 			style={{ width: '100dvw', height: '100dvh', position: 'absolute', overflow: 'hidden' }}
 		>
 			<Marker
