@@ -6,6 +6,7 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { ThemeProvider } from '@/context/ThemeProvider.tsx';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
+import { domAnimation, LazyMotion } from 'framer-motion';
 
 const router = createRouter({ routeTree });
 
@@ -22,12 +23,14 @@ if (!rootElement.innerHTML) {
 	root.render(
 		<StrictMode>
 			<ThemeProvider>
-				<Provider store={store}>
-					<RouterProvider
-						basepath="/SkyTrack"
-						router={router}
-					/>
-				</Provider>
+				<LazyMotion features={domAnimation}>
+					<Provider store={store}>
+						<RouterProvider
+							basepath="/SkyTrack"
+							router={router}
+						/>
+					</Provider>
+				</LazyMotion>
 			</ThemeProvider>
 		</StrictMode>,
 	);

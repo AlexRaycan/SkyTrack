@@ -17,7 +17,6 @@ const Header = (props: HeaderProps) => {
 		<>
 			<nav
 				className={cn(
-					// 'fixed top-10 right-10',
 					isMobile && 'fixed bottom-0',
 					'z-30 flex w-full items-center gap-2 p-0 md:relative',
 					className,
@@ -26,7 +25,7 @@ const Header = (props: HeaderProps) => {
 				<ol
 					className={cn(
 						'bg-background flex min-h-12 w-full items-stretch justify-center overflow-hidden rounded-full md:justify-start',
-						isMobile && 'rounded-t-2xl rounded-b-none pb-10',
+						isMobile && 'rounded-t-2xl rounded-b-none pb-0',
 					)}
 				>
 					{HEADER_MENU.map((item) => (

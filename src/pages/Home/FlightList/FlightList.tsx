@@ -60,9 +60,10 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		<section
 			className={cn(
 				className,
-				'scrollbar-hidden z-10 flex max-h-dvh w-dvw flex-col gap-3 overflow-auto',
-				'px-5 pt-20 pb-32',
-				'md:w-1/5 md:p-0',
+				'scrollbar-hidden z-10 flex max-h-full w-dvw flex-col gap-3 overflow-auto',
+				'px-5 pt-20 pb-44',
+				'md:w-1/5 md:p-0 md:pb-5',
+				'2xl:pb-10',
 			)}
 		>
 			<h2 hidden>Flight List</h2>
