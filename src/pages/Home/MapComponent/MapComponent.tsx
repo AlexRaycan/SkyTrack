@@ -120,8 +120,16 @@ const MapComponent = () => {
 				const geometry = feature.geometry as Point;
 				console.debug('[MapComponent] path feature geometry', geometry);
 
-				return geometry?.coordinates ?? [];
-			}) ?? []
+				return (
+					geometry?.coordinates ?? [
+						[0, 0],
+						[0, 0],
+					]
+				);
+			}) ?? [
+				[0, 0],
+				[0, 0],
+			]
 		);
 	}, [airportFeatures?.features]);
 

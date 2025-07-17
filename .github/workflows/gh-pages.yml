@@ -34,7 +34,7 @@ jobs:
             - name: Build project
               run: bun run build
               env:
-                VITE_MAP_API_KEY: ${{ secrets.VITE_MAP_API_KEY }}
+                  VITE_MAP_API_KEY: ${{ secrets.VITE_MAP_API_KEY }}
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
