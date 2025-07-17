@@ -23,9 +23,9 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 	const { windowWidth, breakpoints } = useWindowWidth();
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
 
-	const { selected } = useFlightSelectionState();
+	const { flightNumber } = useFlightSelectionState();
 
-	const flight = useMemo(() => FLIGHTS.find((fl) => fl.flight.flightNumber === selected), [selected]);
+	const flight = useMemo(() => FLIGHTS.find((fl) => fl.flight.flightNumber === flightNumber), [flightNumber]);
 
 	if (!flight) {
 		return null; // Возвращаем null, если полет не найден
