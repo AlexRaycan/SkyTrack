@@ -19,6 +19,7 @@ const Header = (props: HeaderProps) => {
 				className={cn(
 					isMobile && 'fixed bottom-0',
 					'z-30 flex w-full items-center gap-2 p-0 md:relative',
+					'pointer-events-auto',
 					className,
 				)}
 			>

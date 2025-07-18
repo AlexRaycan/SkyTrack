@@ -33,3 +33,6 @@ dist-ssr
 *.DS_Strore
 *.tmp
 .cache
+
+# GeoJSON files
+*.geojson

@@ -9,11 +9,17 @@ export type ICountry = {
 	name: string;
 };
 
+export type ICoordinates = {
+	longitude: number;
+	latitude: number;
+};
+
 export type IFlightLocation = {
 	time: IFlightTime;
 	airport: string;
 	city: string;
 	timezone: string;
+	coordinates: ICoordinates;
 };
 
 export type IAirlineGradient = {

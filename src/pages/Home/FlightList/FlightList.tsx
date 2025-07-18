@@ -64,6 +64,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				'px-5 pt-20 pb-44',
 				'md:w-1/5 md:p-0 md:pb-5',
 				'2xl:pb-10',
+				'pointer-events-auto',
 			)}
 		>
 			<h2 hidden>Flight List</h2>

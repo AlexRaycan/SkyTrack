@@ -35,6 +35,10 @@ export const FLIGHTS: IFlight[] = [
 					scheduled: '2024-06-12T07:10:00+03:00',
 					actual: '2024-06-12T07:16:00+03:00',
 				},
+				coordinates: {
+					longitude: 23.4114361,
+					latitude: 42.6966934,
+				},
 			},
 			to: {
 				airport: 'PEK', // Beijing
@@ -43,6 +47,10 @@ export const FLIGHTS: IFlight[] = [
 				time: {
 					scheduled: '2024-06-12T18:45:00+08:00',
 					estimated: '2024-06-12T18:52:00+08:00',
+				},
+				coordinates: {
+					longitude: 116.5975,
+					latitude: 40.0725,
 				},
 			},
 		},
@@ -81,6 +89,10 @@ export const FLIGHTS: IFlight[] = [
 					scheduled: '2024-06-12T08:15:00+00:00',
 					actual: '2024-06-12T08:24:00+00:00',
 				},
+				coordinates: {
+					longitude: -6.270075,
+					latitude: 53.421333,
+				},
 			},
 			to: {
 				airport: 'LCA', // Larnaca
@@ -89,6 +101,10 @@ export const FLIGHTS: IFlight[] = [
 				time: {
 					scheduled: '2024-06-12T13:25:00+03:00',
 					estimated: '2024-06-12T13:23:00+03:00',
+				},
+				coordinates: {
+					longitude: 33.624184,
+					latitude: 34.875882,
 				},
 			},
 		},
@@ -127,6 +143,10 @@ export const FLIGHTS: IFlight[] = [
 					scheduled: '2024-06-12T09:00:00+01:00',
 					actual: '2024-06-12T09:10:00+01:00',
 				},
+				coordinates: {
+					longitude: 7.215691,
+					latitude: 43.658364,
+				},
 			},
 			to: {
 				airport: 'TBS', // Tbilisi
@@ -135,6 +155,10 @@ export const FLIGHTS: IFlight[] = [
 				time: {
 					scheduled: '2024-06-12T13:30:00+04:00',
 					estimated: '2024-06-12T13:40:00+04:00',
+				},
+				coordinates: {
+					longitude: 44.954167,
+					latitude: 41.669167,
 				},
 			},
 		},
@@ -173,6 +197,10 @@ export const FLIGHTS: IFlight[] = [
 					scheduled: '2024-06-12T06:55:00+00:00',
 					actual: '2024-06-12T07:05:00+00:00',
 				},
+				coordinates: {
+					longitude: -8.678056,
+					latitude: 41.235556,
+				},
 			},
 			to: {
 				airport: 'GYD', // Baku
@@ -181,6 +209,10 @@ export const FLIGHTS: IFlight[] = [
 				time: {
 					scheduled: '2024-06-12T15:00:00+04:00',
 					estimated: '2024-06-12T15:15:00+04:00',
+				},
+				coordinates: {
+					longitude: 50.046667,
+					latitude: 40.466667,
 				},
 			},
 		},
@@ -219,6 +251,10 @@ export const FLIGHTS: IFlight[] = [
 					scheduled: '2024-06-12T10:30:00+01:00',
 					actual: '2024-06-12T10:37:00+01:00',
 				},
+				coordinates: {
+					longitude: 8.562152,
+					latitude: 50.037933,
+				},
 			},
 			to: {
 				airport: 'HND', // Tokyo Haneda
@@ -227,6 +263,10 @@ export const FLIGHTS: IFlight[] = [
 				time: {
 					scheduled: '2024-06-13T05:55:00+09:00',
 					estimated: '2024-06-13T06:05:00+09:00',
+				},
+				coordinates: {
+					longitude: 139.779839,
+					latitude: 35.549393,
 				},
 			},
 		},

@@ -8,7 +8,8 @@
 			"@fonts/*": ["./src/assets/fonts/*"],
 			"@pages/*": ["./src/pages/*"],
 			"@components/*": ["./src/components/*"],
-			"@styles": ["./src/styles/_index.scss"]
+			"@styles": ["./src/styles/_index.scss"],
+			"@lib/*": ["./src/lib/*"]
 		}
 	},
 	"references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
