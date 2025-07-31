@@ -7,6 +7,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useMapData } from '@/hooks/useMapData.ts';
 import { cn } from '@lib/utils.ts';
 import type { IMapBounds } from '@/types/map.types.ts';
+import type { IProcessedFlights } from '@/services/external/opensky/opensky.types.ts';
 
 const layerStylePathSolid: LayerProps = {
 	id: 'path',
@@ -40,7 +41,7 @@ const mapStyle = '01980e13-49e3-7035-9cac-73918fb0bbba';
 
 interface MapComponentProps {
 	refetch?: () => void;
-	data?: any;
+	data?: IProcessedFlights;
 	setBbox: (bbox: IMapBounds | undefined) => void;
 }
 
@@ -52,7 +53,29 @@ const MapComponent = ({ refetch, data, setBbox }: MapComponentProps) => {
 	const aircraftBearing = (aircraft?.features[0]?.properties as { bearing?: number })?.bearing;
 
 	const inactiveFlightsMarker = useMemo(() => {
-		return inactiveFlights.map((fl, index) => {
+		if (!data?.flights.length) return [];
+
+		return data.flights.map((fl, index) => {
+			const { longitude, latitude } = fl.position;
+			const { heading } = fl.movement;
+
+			return (
+				<Marker
+					key={`inactive-flight-${index}`}
+					longitude={longitude ?? 0}
+					latitude={latitude ?? 0}
+				>
+					<div
+						className={cn('scale-75 opacity-70')}
+						style={{ rotate: `${heading ? heading - 90 : 0}deg` }}
+					>
+						<AirplaneIcon />
+					</div>
+				</Marker>
+			);
+		});
+
+		/*return inactiveFlights.map((fl, index) => {
 			const bearing = (fl?.aircraft?.features[0]?.properties as { bearing?: number })?.bearing ?? 0;
 			const coordinates = (fl?.aircraft?.features[0]?.geometry as { coordinates?: number[] })?.coordinates ?? [
 				0, 0,
@@ -72,8 +95,8 @@ const MapComponent = ({ refetch, data, setBbox }: MapComponentProps) => {
 					</div>
 				</Marker>
 			);
-		});
-	}, [inactiveFlights]);
+		});*/
+	}, [data]);
 
 	const getBbox = () => {
 		const bounds = mapRef.current?.getBounds();

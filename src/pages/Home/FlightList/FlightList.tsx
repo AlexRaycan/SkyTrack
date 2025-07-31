@@ -5,14 +5,16 @@ import Card from '@components/Card';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 import Skeleton from '@components/Skeleton';
+import type { IOpenSkyFlight, IProcessedFlights } from '@/services/external/opensky/opensky.types.ts';
 
 interface FlightListProps {
 	className?: string;
+	flights?: IOpenSkyFlight[];
+	isSuccess?: boolean;
 }
 
 const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
-	const { className } = props;
-	const [isLoading, setIsLoading] = useState(false);
+	const { className, flights, isSuccess } = props;
 	const favorites = useAppSelector((state) => state.favorites);
 
 	const { isFavorite } = useFlightSelectionState();
@@ -76,8 +78,8 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 					/>
 				</label>
 			</form>
-			{isLoading && Array.from({ length: 10 }).map((_, idx) => <Skeleton key={idx} />)}
-			{!isLoading &&
+			{!isSuccess && Array.from({ length: 10 }).map((_, idx) => <Skeleton key={idx} />)}
+			{isSuccess &&
 				filteredFlights.map((flight) => (
 					<Card
 						key={flight.flight.flightNumber}
