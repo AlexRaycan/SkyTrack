@@ -149,10 +149,14 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 									gap={4}
 									alignment={'right'}
 								>
-									<div className={cn('block space-x-2')}>
-										<span
-											className={cn(`fi fi-${flight.flightInfo.country.code.toLowerCase()}`)}
-										></span>
+									<div className={cn('flex gap-2')}>
+										<img
+											alt={`${flight.flightInfo.country.name} flag`}
+											src={`https://map.opensky-network.org/flags/3x2/${flight.flightInfo.country.code.toUpperCase()}.svg`}
+											width={24}
+											height={24}
+											className={cn('rounded-xs')}
+										/>
 										<span>{flight.flightInfo.country.name}</span>
 									</div>
 								</FlightDetailsCell>

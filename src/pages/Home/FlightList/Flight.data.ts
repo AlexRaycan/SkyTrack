@@ -1,4 +1,4 @@
-import type { IFlight } from '@/types/types.ts';
+import type { IFlight } from '@/types/flight.types.ts';
 // Импорт SVG логотипов
 import turkishLogo from '@assets/airlines/turkish.svg';
 import ryanairLogo from '@assets/airlines/ryanair.svg';

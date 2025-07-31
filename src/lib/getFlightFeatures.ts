@@ -1,7 +1,7 @@
 import { greatCircle, length, point } from '@turf/turf';
 import { getRouteProgress } from '@lib/getMapRouteProgress.ts';
 import type { FeatureCollection } from 'geojson';
-import type { IFlight } from '@/types/types.ts';
+import type { IFlight } from '@/types/flight.types.ts';
 
 export const getFlightFeatures = (flight?: IFlight) => {
 	if (!flight) {

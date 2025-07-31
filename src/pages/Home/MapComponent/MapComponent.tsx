@@ -1,11 +1,12 @@
 import Map, { Layer, type LayerProps, type MapRef, Marker, Source } from 'react-map-gl/maplibre';
 import type { Point } from 'geojson';
 import AirplaneIcon from '@assets/icons/other/airplane.svg?react';
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useMapData } from '@/hooks/useMapData.ts';
 import { cn } from '@lib/utils.ts';
+import type { IMapBounds } from '@/types/map.types.ts';
 
 const layerStylePathSolid: LayerProps = {
 	id: 'path',
@@ -35,20 +36,16 @@ const layerStylePathDashed: LayerProps = {
 	},
 };
 
-/*const layerStylePoint: LayerProps = {
-	id: 'point',
-	type: 'circle',
-	source: 'geojson-active-source',
-	layout: {},
-	paint: {
-		'circle-color': '#007cbf',
-		'circle-radius': 10,
-	},
-};*/
-
 const mapStyle = '01980e13-49e3-7035-9cac-73918fb0bbba';
 
-const MapComponent = () => {
+interface MapComponentProps {
+	refetch?: () => void;
+	data?: any;
+	bbox?: IMapBounds;
+	setBbox: (bbox: IMapBounds | undefined) => void;
+}
+
+const MapComponent = ({ refetch, data, bbox, setBbox }: MapComponentProps) => {
 	const mapRef = useRef<MapRef | null>(null);
 	const { currentFlight } = useFlightSelectionState();
 	const { aircraft, solidRoute, dashedRoute, inactiveFlights } = useMapData(currentFlight);
@@ -79,22 +76,44 @@ const MapComponent = () => {
 		});
 	}, [inactiveFlights]);
 
+	const onMapLoad = useCallback(() => {
+		console.debug('[MapComponent] Map loaded');
+
+		if (mapRef.current) {
+			console.debug('[MapComponent] Map ref:', mapRef.current.getBounds());
+
+			// Optionally, you can set the initial bounds or other properties here
+			const bounds = mapRef.current.getBounds();
+			console.debug('[MapComponent] Initial map bounds:', bounds);
+			setBbox({
+				lamin: bounds._sw.lat,
+				lamax: bounds._ne.lat,
+				lomin: bounds._sw.lng,
+				lomax: bounds._ne.lng,
+			});
+		}
+	}, [setBbox]);
+
 	// fly to the current flight if it is active
 	useEffect(() => {
 		console.debug('[MapComponent] current flight', currentFlight);
 
-		if (!currentFlight || !mapRef.current || !coordinates) return;
+		if (!currentFlight || !mapRef?.current || !coordinates) return;
 
 		console.debug('[MapComponent] aircraftCoordinates', coordinates);
 
-		mapRef.current.flyTo({
+		mapRef.current?.flyTo({
 			center: [coordinates[0], coordinates[1]], // [longitude latitude],
 			zoom: 5, // Initial zoom level
 			speed: 1, // Adjust the speed of the flyTo animation
 			curve: 1, // Adjust the curve of the flyTo animation
 			essential: true,
 		});
-	}, [coordinates, currentFlight]);
+	}, [coordinates, currentFlight, mapRef]);
+
+	useEffect(() => {
+		refetch?.();
+	}, [refetch]);
 
 	return (
 		<Map
@@ -108,6 +127,7 @@ const MapComponent = () => {
 			reuseMaps
 			mapStyle={`https://api.maptiler.com/maps/${mapStyle}/style.json?key=${import.meta.env.VITE_MAP_API_KEY}`}
 			style={{ width: '100dvw', height: '100dvh', position: 'absolute', overflow: 'hidden' }}
+			onLoad={onMapLoad}
 		>
 			{/*<Source
 				id="geojson-active-source"

@@ -1,9 +1,10 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { FLIGHTS } from './Flight.data.ts';
 import Card from '@components/Card';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
+import Skeleton from '@components/Skeleton';
 
 interface FlightListProps {
 	className?: string;
@@ -11,7 +12,7 @@ interface FlightListProps {
 
 const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 	const { className } = props;
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const favorites = useAppSelector((state) => state.favorites);
 
 	const { isFavorite } = useFlightSelectionState();
@@ -29,7 +30,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		return FLIGHTS.filter((flight) => {
 			const flightInfo = [
 				flight.flight.flightNumber,
-				flight.flight.typeCode,
+				/*flight.flight.typeCode,
 				flight.flight.callSign,
 				flight.flight.airline.name,
 				flight.flight.from.city,
@@ -38,7 +39,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				flight.flight.to.airport,
 				flight.flightInfo.aircraft,
 				flight.flightInfo.country.code,
-				flight.flightInfo.country.name,
+				flight.flightInfo.country.name,*/
 			]
 				.join(' ')
 				.toLowerCase();
@@ -46,15 +47,6 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 			return flightInfo.includes(filter.toLowerCase());
 		});
 	}, [favorites, filter, isFavorite]);
-
-	// ! TODO: убрать таймаут, когда данные будут браться с сервера
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setIsLoading(false);
-		}, 1500);
-
-		return () => clearTimeout(timer);
-	}, []);
 
 	return (
 		<section
@@ -84,14 +76,14 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 					/>
 				</label>
 			</form>
-			{/* !TODO: сделать <Skeleton /> самостоятельной карточкой и вынести сюда */}
-			{filteredFlights.map((flight) => (
-				<Card
-					key={flight.flight.flightNumber}
-					flight={flight}
-					isLoading={isLoading}
-				/>
-			))}
+			{isLoading && Array.from({ length: 10 }).map((_, idx) => <Skeleton key={idx} />)}
+			{!isLoading &&
+				filteredFlights.map((flight) => (
+					<Card
+						key={flight.flight.flightNumber}
+						flight={flight}
+					/>
+				))}
 		</section>
 	);
 });
