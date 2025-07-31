@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { IFetchAirportsParams, IFetchAirportsResponse } from './airportdb.types';
+import type { IAeroDataBoxFlightResponse } from '@/services/external/aerodatabox/aerodatabox.types.ts';
 
 class AirportdbService {
 	private readonly baseUrl: string;
@@ -10,7 +11,7 @@ class AirportdbService {
 		this.apiKey = import.meta.env.VITE_AIRPORTDB_API_KEY ?? '';
 	}
 
-	async fetchAirport({ icao }: IFetchAirportsParams) {
+	async fetchAirport({ icao }: IFetchAirportsParams): Promise<IAeroDataBoxFlightResponse> {
 		const url = new URL(`${this.baseUrl}/airport/${icao}`);
 		url.searchParams.append('apiToken', this.apiKey);
 

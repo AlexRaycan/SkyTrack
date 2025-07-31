@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"server:run": "node ./server/opensky-proxy.cjs",
+		"server:run": "node server/server.cjs",
 		"build": "tsc -b && vite build",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0  --no-warn-ignored && stylelint \"**/*.css\"",
 		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix --max-warnings 0 --no-warn-ignored",
@@ -49,6 +49,7 @@
 		"@stylistic/eslint-plugin": "^5.1.0",
 		"@svgr/plugin-svgo": "^8.1.0",
 		"@tanstack/eslint-plugin-query": "^5.81.2",
+		"@tanstack/react-query-devtools": "^5.83.0",
 		"@tanstack/router-plugin": "^1.127.8",
 		"@types/cors": "^2.8.19",
 		"@types/geojson": "^7946.0.16",

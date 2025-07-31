@@ -1,4 +1,4 @@
-import Map, { Layer, type LayerProps, type MapRef, Marker, Source } from 'react-map-gl/maplibre';
+import Map, { Layer, type LayerProps, type LngLatBounds, type MapRef, Marker, Source } from 'react-map-gl/maplibre';
 import type { Point } from 'geojson';
 import AirplaneIcon from '@assets/icons/other/airplane.svg?react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
@@ -41,11 +41,10 @@ const mapStyle = '01980e13-49e3-7035-9cac-73918fb0bbba';
 interface MapComponentProps {
 	refetch?: () => void;
 	data?: any;
-	bbox?: IMapBounds;
 	setBbox: (bbox: IMapBounds | undefined) => void;
 }
 
-const MapComponent = ({ refetch, data, bbox, setBbox }: MapComponentProps) => {
+const MapComponent = ({ refetch, data, setBbox }: MapComponentProps) => {
 	const mapRef = useRef<MapRef | null>(null);
 	const { currentFlight } = useFlightSelectionState();
 	const { aircraft, solidRoute, dashedRoute, inactiveFlights } = useMapData(currentFlight);
@@ -76,22 +75,37 @@ const MapComponent = ({ refetch, data, bbox, setBbox }: MapComponentProps) => {
 		});
 	}, [inactiveFlights]);
 
+	const getBbox = () => {
+		const bounds = mapRef.current?.getBounds();
+
+		if (!bounds) {
+			console.warn('[MapComponent] No bounds available');
+
+			return undefined;
+		}
+
+		console.debug('[MapComponent] Initial map bounds:', bounds);
+
+		return {
+			lamin: bounds.getSouthWest().lat,
+			lamax: bounds.getNorthEast().lat,
+			lomin: bounds.getSouthWest().lng,
+			lomax: bounds.getNorthEast().lng,
+		} as IMapBounds;
+	};
+
 	const onMapLoad = useCallback(() => {
 		console.debug('[MapComponent] Map loaded');
+		setBbox(getBbox());
 
-		if (mapRef.current) {
-			console.debug('[MapComponent] Map ref:', mapRef.current.getBounds());
+		mapRef.current?.on('moveend', () => {
+			const newBbox = getBbox();
 
-			// Optionally, you can set the initial bounds or other properties here
-			const bounds = mapRef.current.getBounds();
-			console.debug('[MapComponent] Initial map bounds:', bounds);
-			setBbox({
-				lamin: bounds._sw.lat,
-				lamax: bounds._ne.lat,
-				lomin: bounds._sw.lng,
-				lomax: bounds._ne.lng,
-			});
-		}
+			if (newBbox) {
+				console.debug('[MapComponent] Updated map bounds:', newBbox);
+				setBbox(newBbox);
+			}
+		});
 	}, [setBbox]);
 
 	// fly to the current flight if it is active
