@@ -11,7 +11,7 @@ import type { IProcessedFlights } from '@/services/external/opensky/opensky.type
 export const Home = () => {
 	const [bbox, setBbox] = useState<IMapBounds | undefined>(undefined);
 
-	const { data, isLoading, refetch, error, isError, isSuccess } = useQuery({
+	const { data, refetch, error, isError, isSuccess } = useQuery({
 		queryKey: ['flights'],
 		queryFn: async () => {
 			if (!bbox) {

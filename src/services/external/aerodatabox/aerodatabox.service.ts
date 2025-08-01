@@ -1,11 +1,5 @@
 import axios from 'axios';
-import type { IMapBounds } from '@/types/map.types.ts';
-import type {
-	IOpenSkyFlight,
-	IOpenskyRawResponse,
-	IOpenskyStateArray,
-	IProcessedFlights,
-} from '@/services/external/opensky/opensky.types.ts';
+import type { IAeroDataBoxFlightResponse } from './aerodatabox.types.ts';
 
 class AeroDataBoxService {
 	private readonly baseUrl: string;
@@ -14,7 +8,7 @@ class AeroDataBoxService {
 		this.baseUrl = import.meta.env.VITE_BASE_URL_API ?? '/api';
 	}
 
-	async fetchFlights(icao24: string) {
+	async fetchFlightData(icao24: string): Promise<IAeroDataBoxFlightResponse> {
 		if (!icao24) {
 			throw new Error('Bounding box is required');
 		}
@@ -30,7 +24,7 @@ class AeroDataBoxService {
 
 			return response.data;
 		} catch (error) {
-			console.error('[OpenskyService] fetchFlights error:', error);
+			console.error('[AeroDataBox] fetchFlights error:', error);
 			throw error;
 		}
 	}

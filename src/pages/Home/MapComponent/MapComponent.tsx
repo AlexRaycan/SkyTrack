@@ -1,4 +1,4 @@
-import Map, { Layer, type LayerProps, type LngLatBounds, type MapRef, Marker, Source } from 'react-map-gl/maplibre';
+import Map, { Layer, type LayerProps, type MapRef, Marker, Source } from 'react-map-gl/maplibre';
 import type { Point } from 'geojson';
 import AirplaneIcon from '@assets/icons/other/airplane.svg?react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
@@ -48,7 +48,7 @@ interface MapComponentProps {
 const MapComponent = ({ refetch, data, setBbox }: MapComponentProps) => {
 	const mapRef = useRef<MapRef | null>(null);
 	const { currentFlight } = useFlightSelectionState();
-	const { aircraft, solidRoute, dashedRoute, inactiveFlights } = useMapData(currentFlight);
+	const { aircraft, solidRoute, dashedRoute } = useMapData(currentFlight);
 	const { coordinates } = (aircraft?.features[0]?.geometry as Point) ?? [];
 	const aircraftBearing = (aircraft?.features[0]?.properties as { bearing?: number })?.bearing;
 
