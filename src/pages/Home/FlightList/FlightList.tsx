@@ -5,7 +5,8 @@ import Card from '@components/Card';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 import Skeleton from '@components/Skeleton';
-import type { IOpenSkyFlight, IProcessedFlights } from '@/services/external/opensky/opensky.types.ts';
+import type { IOpenSkyFlight } from '@/services/external/opensky/opensky.types.ts';
+import type { IAeroDataBoxFlightResponse } from '@/services/external/aerodatabox/aerodatabox.types.ts';
 
 interface FlightListProps {
 	className?: string;
@@ -50,6 +51,14 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		});
 	}, [favorites, filter, isFavorite]);
 
+	const flightsMemo = useMemo(() => {
+		if (!flights?.length) return [];
+
+		const flightsInfo: IAeroDataBoxFlightResponse[] = [];
+
+		console.debug('[FlightList] Flights info memoized:', flightsInfo);
+	}, [flights]);
+
 	return (
 		<section
 			className={cn(
@@ -80,12 +89,13 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 			</form>
 			{!isSuccess && Array.from({ length: 10 }).map((_, idx) => <Skeleton key={idx} />)}
 			{isSuccess &&
-				filteredFlights.map((flight) => (
+				filteredFlights?.map((flight) => (
 					<Card
 						key={flight.flight.flightNumber}
 						flight={flight}
 					/>
 				))}
+			{flightsMemo}
 		</section>
 	);
 });

@@ -1,4 +1,3 @@
-// server/server.cjs
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -9,6 +8,7 @@ const app = express();
 const PORT = 3001;
 const clientId = process.env.VITE_OPENSKY_CLIENT_ID;
 const clientSecret = process.env.VITE_OPENSKY_CLIENT_SECRET;
+const aerodataboxApiKey = process.env.VITE_AERODATABOX_API_KEY;
 
 app.use(cors());
 
@@ -65,13 +65,30 @@ app.get(`${process.env.VITE_BASE_URL_API}/flight-info/:icao24`, async (req, res)
 			withAircraftImage: true,
 			withLocation: true,
 		});
+		console.debug('Параметры запроса к AeroDataBox API:', params.toString());
 
-		const response = await axios.get(`https://aerodatabox.p.rapidapi.com/flights/icao24/${icao24}`, params, {
+		const options = {
+			method: 'GET',
+			url: `https://aerodatabox.p.rapidapi.com/flights/icao24/${icao24}`,
+			params: {
+				withAircraftImage: 'true',
+				withLocation: 'true',
+			},
+			headers: {
+				'x-rapidapi-key': aerodataboxApiKey, // Ваш RapidAPI ключ
+				'x-rapidapi-host': 'aerodatabox.p.rapidapi.com',
+			},
+		};
+
+		const response = await axios.request(options);
+		console.debug('Response from AeroDataBox API:', response.data);
+
+		/*const response = await axios.get(`https://aerodatabox.p.rapidapi.com/flights/icao24/${icao24}`, params, {
 			headers: {
 				'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
 				'X-RapidAPI-Key': process.env.VITE_AERODATABOX_API_KEY, // Ваш RapidAPI ключ
 			},
-		});
+		});*/
 
 		console.debug('Ответ от AeroDataBox API:', response.data);
 
