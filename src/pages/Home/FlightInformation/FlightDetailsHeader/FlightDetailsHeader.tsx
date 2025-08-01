@@ -2,7 +2,7 @@ import { memo, useMemo } from 'react';
 import { cn } from '@/lib/utils.ts';
 import Button from '@components/Button';
 import { X } from '@components/animate-ui/icons/x.tsx';
-import type { IAirlineGradient, IFlight } from '@/types/types.ts';
+import type { IAirlineGradient, IFlight } from '@/types/flight.types.ts';
 import { Link } from '@tanstack/react-router';
 import AddToFavoriteButton from '@components/Card/AddToFavoriteButton';
 

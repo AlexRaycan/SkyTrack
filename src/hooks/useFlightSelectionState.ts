@@ -1,28 +1,31 @@
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useSearch } from '@tanstack/react-router';
 import { useMemo } from 'react';
-import type { IFlight } from '@/types/types.ts';
+import type { IFlight } from '@/types/flight.types.ts';
+import { FLIGHTS } from '@pages/Home/FlightList/Flight.data.ts';
 
 export const useFlightSelectionState = (flight?: IFlight) => {
 	const favorites = useAppSelector((state) => state.favorites);
-	const { selected, isFavorite } = useSearch({
+	const { flightNumber, isFavorite } = useSearch({
 		strict: false,
 		select: (search) => {
 			const { flightNumber, filter } = search as { flightNumber: string; filter: string };
 
-			return { selected: flightNumber, isFavorite: !!filter };
+			return { flightNumber, isFavorite: !!filter };
 		},
 	});
 
 	const isActive = useMemo(() => {
-		const isSelected = selected === flight?.flight.flightNumber;
+		const isSelected = flightNumber === flight?.flight.flightNumber;
 
 		if (isFavorite && isSelected) {
-			return favorites.includes(selected);
+			return favorites.includes(flightNumber);
 		}
 
 		return isSelected;
-	}, [selected, flight?.flight.flightNumber, isFavorite, favorites]);
+	}, [flightNumber, flight?.flight.flightNumber, isFavorite, favorites]);
 
-	return { selected, isActive, isFavorite };
+	const currentFlight = useMemo(() => FLIGHTS.find((fl) => fl.flight.flightNumber === flightNumber), [flightNumber]);
+
+	return { currentFlight, flightNumber, isActive, isFavorite };
 };

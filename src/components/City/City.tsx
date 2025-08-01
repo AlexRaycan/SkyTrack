@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils.ts';
 import { memo } from 'react';
-import type { IFlightLocation } from '@/types/types.ts';
+import type { IFlightLocation } from '@/types/flight.types.ts';
 
 interface CityProps {
 	className?: string;
