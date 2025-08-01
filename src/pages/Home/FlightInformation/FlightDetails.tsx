@@ -23,9 +23,9 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 	const { windowWidth, breakpoints } = useWindowWidth();
 	const isMobile = windowWidth < breakpoints.md; // Сравнение с брейкпоинтом 'md'
 
-	const { selected } = useFlightSelectionState();
+	const { flightNumber } = useFlightSelectionState();
 
-	const flight = useMemo(() => FLIGHTS.find((fl) => fl.flight.flightNumber === selected), [selected]);
+	const flight = useMemo(() => FLIGHTS.find((fl) => fl.flight.flightNumber === flightNumber), [flightNumber]);
 
 	if (!flight) {
 		return null; // Возвращаем null, если полет не найден
@@ -48,6 +48,7 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 					'md:mb-5 md:min-w-lg md:rounded-3xl',
 					'2xl:mb-10',
 					'scrollbar-hidden overflow-auto',
+					'pointer-events-auto',
 				)}
 			>
 				<aside
@@ -148,10 +149,14 @@ const FlightDetails = memo(function FlightInformation({ ...props }: FlightInform
 									gap={4}
 									alignment={'right'}
 								>
-									<div className={cn('block space-x-2')}>
-										<span
-											className={cn(`fi fi-${flight.flightInfo.country.code.toLowerCase()}`)}
-										></span>
+									<div className={cn('flex gap-2')}>
+										<img
+											alt={`${flight.flightInfo.country.name} flag`}
+											src={`https://map.opensky-network.org/flags/3x2/${flight.flightInfo.country.code.toUpperCase()}.svg`}
+											width={24}
+											height={24}
+											className={cn('rounded-xs')}
+										/>
 										<span>{flight.flightInfo.country.name}</span>
 									</div>
 								</FlightDetailsCell>

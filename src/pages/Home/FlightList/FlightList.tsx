@@ -1,17 +1,20 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { FLIGHTS } from './Flight.data.ts';
 import Card from '@components/Card';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
+import Skeleton from '@components/Skeleton';
+import type { IOpenSkyFlight, IProcessedFlights } from '@/services/external/opensky/opensky.types.ts';
 
 interface FlightListProps {
 	className?: string;
+	flights?: IOpenSkyFlight[];
+	isSuccess?: boolean;
 }
 
 const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
-	const { className } = props;
-	const [isLoading, setIsLoading] = useState(true);
+	const { className, flights, isSuccess } = props;
 	const favorites = useAppSelector((state) => state.favorites);
 
 	const { isFavorite } = useFlightSelectionState();
@@ -29,7 +32,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		return FLIGHTS.filter((flight) => {
 			const flightInfo = [
 				flight.flight.flightNumber,
-				flight.flight.typeCode,
+				/*flight.flight.typeCode,
 				flight.flight.callSign,
 				flight.flight.airline.name,
 				flight.flight.from.city,
@@ -38,7 +41,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				flight.flight.to.airport,
 				flight.flightInfo.aircraft,
 				flight.flightInfo.country.code,
-				flight.flightInfo.country.name,
+				flight.flightInfo.country.name,*/
 			]
 				.join(' ')
 				.toLowerCase();
@@ -46,15 +49,6 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 			return flightInfo.includes(filter.toLowerCase());
 		});
 	}, [favorites, filter, isFavorite]);
-
-	// ! TODO: убрать таймаут, когда данные будут браться с сервера
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setIsLoading(false);
-		}, 1500);
-
-		return () => clearTimeout(timer);
-	}, []);
 
 	return (
 		<section
@@ -64,6 +58,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				'px-5 pt-20 pb-44',
 				'md:w-1/5 md:p-0 md:pb-5',
 				'2xl:pb-10',
+				'pointer-events-auto',
 			)}
 		>
 			<h2 hidden>Flight List</h2>
@@ -83,14 +78,14 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 					/>
 				</label>
 			</form>
-			{/* !TODO: сделать <Skeleton /> самостоятельной карточкой и вынести сюда */}
-			{filteredFlights.map((flight) => (
-				<Card
-					key={flight.flight.flightNumber}
-					flight={flight}
-					isLoading={isLoading}
-				/>
-			))}
+			{!isSuccess && Array.from({ length: 10 }).map((_, idx) => <Skeleton key={idx} />)}
+			{isSuccess &&
+				filteredFlights.map((flight) => (
+					<Card
+						key={flight.flight.flightNumber}
+						flight={flight}
+					/>
+				))}
 		</section>
 	);
 });

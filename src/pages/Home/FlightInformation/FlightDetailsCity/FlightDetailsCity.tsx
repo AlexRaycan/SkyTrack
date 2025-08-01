@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { cn } from '@/lib/utils.ts';
 import Cell from '@components/Cell';
-import type { IFlightLocation } from '@/types/types.ts';
+import type { IFlightLocation } from '@/types/flight.types.ts';
 
 interface FICityProps {
 	className?: string;
