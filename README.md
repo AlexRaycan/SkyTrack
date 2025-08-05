@@ -3,6 +3,7 @@
 ## Project Description
 
 **SkyTrack** — tracking flight app. Flight list, flight details, filters, add to favorites and so on.
+![SkyTrack](./preview.png)
 
 ## Как настроить автоматический деплой на GitHub Pages
 
