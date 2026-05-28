@@ -1,95 +1,81 @@
 # SkyTrack
 
-## Project Description
+SkyTrack is a flight tracking application built with React, TypeScript, and modern frontend tooling. The project integrates with external aviation data APIs to provide real-time flight information, interactive map visualization, search capabilities, and flight monitoring features.
 
-**SkyTrack** — tracking flight app. Flight list, flight details, filters, add to favorites and so on.
-![SkyTrack](./preview.png)
+## Live Demo
 
-## Как настроить автоматический деплой на GitHub Pages
+https://alexraycan.github.io/SkyTrack/
 
-### 1. Форкните или создайте репозиторий на GitHub
+## Repository
 
-1. Зарегистрируйтесь на [github.com](https://github.com).
-2. Создайте новый репозиторий и загрузите туда ваш проект.
+https://github.com/AlexRaycan/SkyTrack
 
-### 2. Добавьте workflow для деплоя
+## Features
 
-1. В корне проекта создайте папку `.github/workflows` (если её нет).
-2. Добавьте файл `gh-pages.yml` со следующим содержимым:
+- Real-time flight tracking
+- Interactive map visualization
+- Flight search and filtering
+- Flight details and status information
+- Favorites management
+- Responsive user interface
+- Loading and error state handling
+- Integration with third-party aviation APIs
 
-    ```yaml
-    name: Deploy to GitHub Pages
+## Tech Stack
 
-    on:
-        push:
-            branches:
-                - main
+### Frontend
 
-    jobs:
-        build-and-deploy:
-            runs-on: ubuntu-latest
-            steps:
-                - name: Checkout repository
-                  uses: actions/checkout@v4
+- React 19
+- TypeScript
+- TanStack Query
+- TanStack Router
+- Axios
+- Tailwind CSS
+- MapLibre GL
+- Leaflet
 
-                - name: Setup Node.js
-                  uses: actions/setup-node@v4
-                  with:
-                      node-version: 20
+### Backend
 
-                - name: Install dependencies
-                  run: npm ci
+- Express.js
 
-                - name: Build project
-                  run: npm run build
+### Development Tools
 
-                - name: Deploy to GitHub Pages
-                  uses: peaceiris/actions-gh-pages@v4
-                  with:
-                      github_token: ${{ secrets.GITHUB_TOKEN }}
-                      publish_dir: ./dist
-    ```
+- ESLint
+- Prettier
+- GitHub Actions
+- Vite
 
-3. Убедитесь, что ваш проект билдится в папку `dist`. Если используется другая папка, замените путь в `publish_dir`.
+## Project Highlights
 
-### 3. Запушьте изменения
+This project demonstrates:
 
-```sh
-git add .
-git commit -m "Добавлен автодеплой на GitHub Pages"
-git push
-```
+- Integration with external REST APIs
+- Asynchronous data fetching and caching
+- TypeScript-based application architecture
+- State management and client-side routing
+- Interactive map-based user experiences
+- Error handling and resilient UI patterns
+- Modern frontend development workflows
 
-### 4. Настройте GitHub Pages
+## Engineering Challenges
 
-1. Перейдите в настройки репозитория на GitHub.
-2. В разделе **Pages** выберите ветку `gh-pages` и папку `/ (root)`.
-3. Сохраните настройки.
+One of the key challenges was building a responsive interface around remote aviation data while maintaining a smooth user experience. This required careful handling of loading states, API responses, data synchronization, and user interactions across multiple views.
 
-Через несколько минут сайт будет доступен по адресу:  
-`https://<ваш-логин>.github.io/<имя-репозитория>/`
+The project also involved designing an intuitive map-based workflow that allows users to explore and monitor flight information efficiently.
 
-### 5. Готово!
+## What I Learned
 
-Теперь при каждом пуше в ветку `main` проект будет автоматически собираться и публиковаться на GitHub Pages.
+- Building scalable TypeScript applications
+- Working with external data providers
+- Managing asynchronous workflows
+- Designing map-driven user experiences
+- Creating maintainable frontend architecture
+- Improving reliability and usability when working with real-time data
 
-## 🚀 Автоматический деплой на GitHub Pages
+## Author
 
-### Как это работает
+Aleksandr Arkushenko
 
-1. При каждом пуше в ветку `main` запускается GitHub Actions workflow.
-2. Проект собирается (`npm run build`), и содержимое папки `dist` автоматически деплоится на GitHub Pages.
+LinkedIn: https://linkedin.com/in/alexraycan
 
-### Как настроить
-
-1. Убедитесь, что ваш build складывается в папку `dist`. Если используется другая папка, измените путь в workflow.
-2. В настройках репозитория на GitHub:
-    - Перейдите в **Settings → Pages**.
-    - В разделе **Build and deployment** выберите **GitHub Actions** как источник.
-3. После пуша в `main` страница будет доступна по адресу:  
-   `https://<ваш-логин>.github.io/<имя-репозитория>/`
-
-### Примечания
-
-- Если у вас другой build-скрипт или папка, измените шаги в `.github/workflows/gh-pages.yml`.
-- Для приватных репозиториев GitHub Pages работает только на платных тарифах.
+Portfolio: https://www.behance.net/alexraycan
