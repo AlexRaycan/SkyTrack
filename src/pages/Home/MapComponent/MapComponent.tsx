@@ -97,7 +97,7 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 		});*/
 	}, [data]);
 
-	const getBbox = () => {
+	const getBbox = useCallback(() => {
 		const bounds = mapRef.current?.getBounds();
 
 		if (!bounds) {
@@ -114,21 +114,20 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 			lomin: bounds.getSouthWest().lng,
 			lomax: bounds.getNorthEast().lng,
 		} as IMapBounds;
-	};
+	}, []);
 
 	const onMapLoad = useCallback(() => {
 		console.debug('[MapComponent] Map loaded');
 		setBbox(getBbox());
+	}, [getBbox, setBbox]);
 
-		mapRef.current?.on('moveend', () => {
-			const newBbox = getBbox();
+	const onMapMoveEnd = useCallback(() => {
+		const newBbox = getBbox();
 
-			if (newBbox) {
-				console.debug('[MapComponent] Updated map bounds:', newBbox);
-				setBbox(newBbox);
-			}
-		});
-	}, [setBbox]);
+		if (newBbox) {
+			setBbox(newBbox);
+		}
+	}, [getBbox, setBbox]);
 
 	// fly to the current flight if it is active
 	useEffect(() => {
@@ -160,6 +159,7 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 			mapStyle={`https://api.maptiler.com/maps/${mapStyle}/style.json?key=${import.meta.env.VITE_MAP_API_KEY}`}
 			style={{ width: '100dvw', height: '100dvh', position: 'absolute', overflow: 'hidden' }}
 			onLoad={onMapLoad}
+			onMoveEnd={onMapMoveEnd}
 		>
 			{/*<Source
 				id="geojson-active-source"

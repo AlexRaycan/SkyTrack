@@ -5,17 +5,14 @@ import Card from '@components/Card';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useFlightSelectionState } from '@/hooks/useFlightSelectionState.ts';
 import Skeleton from '@components/Skeleton';
-import type { IOpenSkyFlight } from '@/services/external/opensky/opensky.types.ts';
-import type { IAeroDataBoxFlightResponse } from '@/services/external/aerodatabox/aerodatabox.types.ts';
 
 interface FlightListProps {
 	className?: string;
-	flights?: IOpenSkyFlight[];
 	isSuccess?: boolean;
 }
 
 const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
-	const { className, flights, isSuccess } = props;
+	const { className, isSuccess } = props;
 	const favorites = useAppSelector((state) => state.favorites);
 
 	const { isFavorite } = useFlightSelectionState();
@@ -30,7 +27,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 
 		if (!filter) return flights;
 
-		return FLIGHTS.filter((flight) => {
+		return flights.filter((flight) => {
 			const flightInfo = [
 				flight.flight.flightNumber,
 				/*flight.flight.typeCode,
@@ -51,14 +48,6 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 		});
 	}, [favorites, filter, isFavorite]);
 
-	const flightsMemo = useMemo(() => {
-		if (!flights?.length) return [];
-
-		const flightsInfo: IAeroDataBoxFlightResponse[] = [];
-
-		console.debug('[FlightList] Flights info memoized:', flightsInfo);
-	}, [flights]);
-
 	return (
 		<section
 			className={cn(
@@ -70,7 +59,7 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 				'pointer-events-auto',
 			)}
 		>
-			<h2 hidden>Flight List</h2>
+			<h2 hidden>Featured flight routes</h2>
 			<form className={'relative flex max-h-16 min-h-16 flex-1'}>
 				<label
 					aria-label={'Flight filter'}
@@ -95,7 +84,6 @@ const FlightList = memo(function FlightList({ ...props }: FlightListProps) {
 						flight={flight}
 					/>
 				))}
-			{flightsMemo}
 		</section>
 	);
 });

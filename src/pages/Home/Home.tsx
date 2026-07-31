@@ -10,9 +10,12 @@ import type { IProcessedFlights } from '@/services/external/opensky/opensky.type
 
 export const Home = () => {
 	const [bbox, setBbox] = useState<IMapBounds | undefined>(undefined);
+	const bboxQueryKey = bbox
+		? [bbox.lamin, bbox.lamax, bbox.lomin, bbox.lomax].map((coordinate) => coordinate.toFixed(2))
+		: [];
 
 	const { data, isSuccess } = useQuery({
-		queryKey: ['flights', bbox?.lamin, bbox?.lamax, bbox?.lomin, bbox?.lomax],
+		queryKey: ['flights', ...bboxQueryKey],
 		queryFn: async () => {
 			if (!bbox) {
 				throw new Error('Bounding box is required');
@@ -24,7 +27,10 @@ export const Home = () => {
 			return {
 				...data,
 				flights: data.flights
-					.filter((fl) => !fl.movement.onGround && fl.position.longitude && fl.position.latitude)
+					.filter(
+						(fl) =>
+							!fl.movement.onGround && fl.position.longitude != null && fl.position.latitude != null,
+					)
 					.slice(0, 100),
 			} as IProcessedFlights;
 		},
@@ -40,10 +46,7 @@ export const Home = () => {
 				setBbox={setBbox}
 			/>
 			<Layout>
-				<FlightList
-					flights={data?.flights}
-					isSuccess={isSuccess}
-				/>
+				<FlightList isSuccess={isSuccess} />
 				<FlightDetails />
 			</Layout>
 		</div>
