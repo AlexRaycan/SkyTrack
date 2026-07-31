@@ -6,12 +6,17 @@ import type {
 	IOpenskyStateArray,
 	IProcessedFlights,
 } from '@/services/external/opensky/opensky.types.ts';
+import { createMockFlights } from '@/services/external/opensky/opensky.mock.ts';
 
 class OpenskyService {
 	private readonly baseUrl: string;
+	readonly usesStaticDemoData: boolean;
 
 	constructor() {
-		this.baseUrl = import.meta.env.VITE_BASE_URL_API ?? '/api';
+		const configuredBaseUrl = import.meta.env.VITE_BASE_URL_API;
+
+		this.baseUrl = configuredBaseUrl ?? '/api';
+		this.usesStaticDemoData = import.meta.env.PROD && !configuredBaseUrl;
 	}
 
 	async fetchFlights(bbox: IMapBounds | undefined): Promise<IProcessedFlights> {
@@ -19,26 +24,22 @@ class OpenskyService {
 			throw new Error('Bounding box is required');
 		}
 
+		if (this.usesStaticDemoData) {
+			return createMockFlights(bbox);
+		}
+
 		const { lamin, lamax, lomin, lomax } = bbox;
 
-		console.debug('[OpenskyService] fetchFlights called with params:', { lamin, lamax, lomin, lomax });
-
 		try {
-			// Формируем URL запроса с параметрами
 			const url = `${this.baseUrl}/states/all`;
 			const params = { lamin, lamax, lomin, lomax };
-
-			console.debug('[OpenskyService] fetchFlights url:', url, params);
-
-			// Выполняем запрос к прокси-серверу
 			const response = await axios.get<IOpenskyRawResponse>(url, { params });
-
-			console.debug('[OpenskyService] fetchFlights response received');
 
 			return this.transformFlightData(response.data);
 		} catch (error) {
-			console.error('[OpenskyService] fetchFlights error:', error);
-			throw error;
+			console.warn('[OpenskyService] Live data unavailable; using demo flights.', error);
+
+			return createMockFlights(bbox);
 		}
 	}
 

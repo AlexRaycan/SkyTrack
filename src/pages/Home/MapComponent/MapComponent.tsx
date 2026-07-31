@@ -40,12 +40,11 @@ const layerStylePathDashed: LayerProps = {
 const mapStyle = '01980e13-49e3-7035-9cac-73918fb0bbba';
 
 interface MapComponentProps {
-	refetch?: () => void;
 	data?: IProcessedFlights;
 	setBbox: (bbox: IMapBounds | undefined) => void;
 }
 
-const MapComponent = ({ refetch, data, setBbox }: MapComponentProps) => {
+const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 	const mapRef = useRef<MapRef | null>(null);
 	const { currentFlight } = useFlightSelectionState();
 	const { aircraft, solidRoute, dashedRoute } = useMapData(currentFlight);
@@ -147,10 +146,6 @@ const MapComponent = ({ refetch, data, setBbox }: MapComponentProps) => {
 			essential: true,
 		});
 	}, [coordinates, currentFlight, mapRef]);
-
-	useEffect(() => {
-		refetch?.();
-	}, [refetch]);
 
 	return (
 		<Map
