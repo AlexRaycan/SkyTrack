@@ -16,7 +16,7 @@ class OpenskyService {
 		const configuredBaseUrl = import.meta.env.VITE_BASE_URL_API;
 
 		this.baseUrl = configuredBaseUrl ?? '/api';
-		this.usesStaticDemoData = import.meta.env.PROD && !configuredBaseUrl;
+		this.usesStaticDemoData = !configuredBaseUrl;
 	}
 
 	async fetchFlights(bbox: IMapBounds | undefined): Promise<IProcessedFlights> {

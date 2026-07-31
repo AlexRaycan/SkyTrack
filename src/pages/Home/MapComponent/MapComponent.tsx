@@ -42,16 +42,45 @@ const mapStyle = '01980e13-49e3-7035-9cac-73918fb0bbba';
 interface MapComponentProps {
 	data?: IProcessedFlights;
 	setBbox: (bbox: IMapBounds | undefined) => void;
+	usesStaticDemoData: boolean;
 }
 
-const MapComponent = ({ data, setBbox }: MapComponentProps) => {
+const MapComponent = ({ data, setBbox, usesStaticDemoData }: MapComponentProps) => {
 	const mapRef = useRef<MapRef | null>(null);
 	const { currentFlight } = useFlightSelectionState();
-	const { aircraft, solidRoute, dashedRoute } = useMapData(currentFlight);
+	const currentFlightNumber = currentFlight?.flight.flightNumber;
+	const { aircraft, solidRoute, dashedRoute, inactiveFlights } = useMapData(currentFlight);
 	const { coordinates } = (aircraft?.features[0]?.geometry as Point) ?? [];
 	const aircraftBearing = (aircraft?.features[0]?.properties as { bearing?: number })?.bearing;
+	const aircraftLongitude = coordinates?.[0];
+	const aircraftLatitude = coordinates?.[1];
 
 	const inactiveFlightsMarker = useMemo(() => {
+		if (usesStaticDemoData) {
+			return inactiveFlights.map(({ aircraft, flightNumber }) => {
+				const markerCoordinates = (aircraft?.features[0]?.geometry as Point | undefined)?.coordinates;
+				const bearing = (aircraft?.features[0]?.properties as { bearing?: number } | undefined)?.bearing;
+
+				if (!markerCoordinates) return null;
+
+				return (
+					<Marker
+						key={flightNumber}
+						longitude={markerCoordinates[0]}
+						latitude={markerCoordinates[1]}
+						anchor="center"
+					>
+						<div
+							className={cn('scale-75 opacity-70')}
+							style={{ rotate: `${bearing ?? 0}deg` }}
+						>
+							<AirplaneIcon />
+						</div>
+					</Marker>
+				);
+			});
+		}
+
 		if (!data?.flights.length) return [];
 
 		return data.flights.map((fl, index) => {
@@ -73,29 +102,7 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 				</Marker>
 			);
 		});
-
-		/*return inactiveFlights.map((fl, index) => {
-			const bearing = (fl?.aircraft?.features[0]?.properties as { bearing?: number })?.bearing ?? 0;
-			const coordinates = (fl?.aircraft?.features[0]?.geometry as { coordinates?: number[] })?.coordinates ?? [
-				0, 0,
-			];
-
-			return (
-				<Marker
-					key={`inactive-flight-${index}`}
-					longitude={coordinates[0] ?? 0}
-					latitude={coordinates[1] ?? 0}
-				>
-					<div
-						className={cn('scale-75 opacity-70')}
-						style={{ rotate: `${bearing}deg` }}
-					>
-						<AirplaneIcon />
-					</div>
-				</Marker>
-			);
-		});*/
-	}, [data]);
+	}, [data, inactiveFlights, usesStaticDemoData]);
 
 	const getBbox = useCallback(() => {
 		const bounds = mapRef.current?.getBounds();
@@ -106,8 +113,6 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 			return undefined;
 		}
 
-		console.debug('[MapComponent] Initial map bounds:', bounds);
-
 		return {
 			lamin: bounds.getSouthWest().lat,
 			lamax: bounds.getNorthEast().lat,
@@ -117,7 +122,6 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 	}, []);
 
 	const onMapLoad = useCallback(() => {
-		console.debug('[MapComponent] Map loaded');
 		setBbox(getBbox());
 	}, [getBbox, setBbox]);
 
@@ -131,20 +135,17 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 
 	// fly to the current flight if it is active
 	useEffect(() => {
-		console.debug('[MapComponent] current flight', currentFlight);
+		if (!currentFlightNumber || !mapRef.current || aircraftLongitude == null || aircraftLatitude == null) return;
 
-		if (!currentFlight || !mapRef?.current || !coordinates) return;
-
-		console.debug('[MapComponent] aircraftCoordinates', coordinates);
-
-		mapRef.current?.flyTo({
-			center: [coordinates[0], coordinates[1]], // [longitude latitude],
+		mapRef.current.stop();
+		mapRef.current.flyTo({
+			center: [aircraftLongitude, aircraftLatitude], // [longitude latitude],
 			zoom: 5, // Initial zoom level
 			speed: 1, // Adjust the speed of the flyTo animation
 			curve: 1, // Adjust the curve of the flyTo animation
 			essential: true,
 		});
-	}, [coordinates, currentFlight, mapRef]);
+	}, [aircraftLatitude, aircraftLongitude, currentFlightNumber]);
 
 	return (
 		<Map
@@ -158,8 +159,8 @@ const MapComponent = ({ data, setBbox }: MapComponentProps) => {
 			reuseMaps
 			mapStyle={`https://api.maptiler.com/maps/${mapStyle}/style.json?key=${import.meta.env.VITE_MAP_API_KEY}`}
 			style={{ width: '100dvw', height: '100dvh', position: 'absolute', overflow: 'hidden' }}
-			onLoad={onMapLoad}
-			onMoveEnd={onMapMoveEnd}
+			onLoad={usesStaticDemoData ? undefined : onMapLoad}
+			onMoveEnd={usesStaticDemoData ? undefined : onMapMoveEnd}
 		>
 			{/*<Source
 				id="geojson-active-source"

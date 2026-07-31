@@ -28,13 +28,12 @@ export const Home = () => {
 				...data,
 				flights: data.flights
 					.filter(
-						(fl) =>
-							!fl.movement.onGround && fl.position.longitude != null && fl.position.latitude != null,
+						(fl) => !fl.movement.onGround && fl.position.longitude != null && fl.position.latitude != null,
 					)
 					.slice(0, 100),
 			} as IProcessedFlights;
 		},
-		enabled: !!bbox,
+		enabled: !openskyService.usesStaticDemoData && !!bbox,
 		refetchInterval: openskyService.usesStaticDemoData ? false : 30_000,
 		retry: 1,
 	});
@@ -44,9 +43,10 @@ export const Home = () => {
 			<MapComponent
 				data={data}
 				setBbox={setBbox}
+				usesStaticDemoData={openskyService.usesStaticDemoData}
 			/>
 			<Layout>
-				<FlightList isSuccess={isSuccess} />
+				<FlightList isSuccess={openskyService.usesStaticDemoData || isSuccess} />
 				<FlightDetails />
 			</Layout>
 		</div>
